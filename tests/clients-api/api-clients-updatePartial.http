@@ -1,0 +1,13 @@
+PATCH http://127.0.0.1:8000/api/clients/1
+Content-Type: application/json
+Accept: application/json
+User-Agent: MyCustomUserAgent/1.0
+
+{
+    "first_name": "Clandestino2",
+    "last_name": "Smith",
+    "email": "katherine.smith@example.org",
+    "phone": "+9847584522",
+    "address": null,
+    "company_name": "Tech Solutions"
+}

@@ -1,0 +1,29 @@
+# # Obtener clientes (default 15)
+GET http://127.0.0.1:8000/api/clients
+
+# # Obtener cliente por ID
+# GET http://127.0.0.1:8000/api/clients/1
+
+# # Paginación
+# GET http://127.0.0.1:8000/api/clients?page=2&per_page=30
+
+# # Filtrado por nombre
+# GET http://127.0.0.1:8000/api/clients?first_name=Juan
+
+# Filtrado por apellido 
+# GET http://127.0.0.1:8000/api/clients?page=1&last_name=Koepp
+
+# Filtrado por correo electrónico
+# GET http://127.0.0.1:8000/api/clients?email=a@example.com
+
+# # Filtrado por nombre de empresa
+# GET http://127.0.0.1:8000/api/clients?page=1&company_name=Smith Co.
+
+# # Ordenar clientes por nombre de empresa (ascendente)
+# GET http://127.0.0.1:8000/api/clients?page=1&order_by=company_name
+
+# # Ordenar clientes por nombre (descendente)
+# GET http://127.0.0.1:8000/api/clients?page=1&order_by=first_name&direction=desc
+
+# # Filtrado y ordenación combinada (busca clientes con el correo LIKE a@example.com y apellido LIKE l, ordenados alfabéticamente por el nombre de la compañía en orden ascendente)
+# GET http://127.0.0.1:8000/api/clients?email=a@example.com&last_name=l&order_by=company_name&direction=asc

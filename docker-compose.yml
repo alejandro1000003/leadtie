@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-react-app
+    ports:
+      - "8080:9000" # puerto de PHP-FPM
+      - "3000:3000" # puerto de React (si usas este puerto para el frontend)
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+    environment:
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/database/database.sqlite
+
+networks:
+  app-network:
+    driver: bridge

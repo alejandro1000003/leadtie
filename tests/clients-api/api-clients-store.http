@@ -1,0 +1,14 @@
+POST http://127.0.0.1:8000/api/clients
+Content-Type: application/json
+Accept: application/json
+User-Agent: MyCustomUserAgent/1.0
+
+{
+    "first_name": "janedoe",
+    "last_name": "Smith",
+    "email": "gasdgasdgg@example.com",
+    "phone": "987-654-3210",
+    "address": "456 Elm St",
+    "company_name": "Smith Co.",
+    "pedorro": "456 Elm St"
+}
