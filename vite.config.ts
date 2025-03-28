@@ -22,4 +22,8 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
     },
+    server: {
+        host: '0.0.0.0', // Escucha en todas las interfaces
+        port: 3000,      // O el puerto que prefieras
+    },
 });
