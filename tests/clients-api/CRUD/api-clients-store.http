@@ -1,7 +1,7 @@
 POST http://127.0.0.1:8000/api/clients
 Content-Type: application/json
 Accept: application/json
-User-Agent: MyCustomUserAgent/1.0
+Authorization: Bearer (token)
 
 {
     "first_name": "janedoe",
