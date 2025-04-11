@@ -17,10 +17,12 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'role',
+        'refresh_token',
     ];
 
     protected $hidden = [
         'password',
+        'refresh_token',
     ];
 
     protected function casts(): array

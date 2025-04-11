@@ -1,6 +1,8 @@
 # # Obtener clientes (default 15)
 GET http://127.0.0.1:8000/api/clients
-Authorization: Bearer (token)
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQzNzY3MjY1LCJleHAiOjE3NDM3NzA4NjUsIm5iZiI6MTc0Mzc2NzI2NSwianRpIjoiTWVpUUN5RjRxQ3dWRkphMyIsInN1YiI6IjE0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.6inBT6Mhs2GwF4BCfiS5Fnvz2Ud8X9G82c9RsiLjmoo
+
+
 
 # # Obtener cliente por ID
 # GET http://127.0.0.1:8000/api/clients/1

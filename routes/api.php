@@ -12,14 +12,16 @@ use App\Http\Middleware\IsAdmin;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/refresh', [AuthController::class, 'refresh']);
+Route::post('/getuser', [AuthController::class, 'getUser']);
 
 Route::middleware([IsUserAuth::class])->group(function () {
-
+    
     Route::controller(AuthController::class)->group(function () {
-        Route::get('/user', 'user')->name('user');
+        Route::get('/user', 'getUser')->name('user');
         Route::post('/logout', 'logout')->name('logout');
     });
-
+    
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
 
