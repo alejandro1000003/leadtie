@@ -8,25 +8,24 @@ import { useState } from 'react';
 import { useUserStore } from '@/stores/use-user-store';
 
 export default function Login() {
-    // Usamos el store de Zustand para obtener y actualizar el estado
+
     const { isLoading, login, setLoading } = useUserStore();
 
-    // Estado local para email y password
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const [errors, setErrors] = useState<string[]>([]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true); // Iniciamos el estado de carga
+        setLoading(true);
 
         try {
-            await login(emailInput, passwordInput); // Llamamos a la función login del store
-            window.location.href = '/dashboard'; // Redirigimos al dashboard
+            await login(emailInput, passwordInput);
+            window.location.href = '/dashboard';
         } catch (error) {
             setErrors(['Error al iniciar sesión. Inténtalo de nuevo.']);
         } finally {
-            setLoading(false); // Terminamos el estado de carga
+            setLoading(false);
         }
     };
 
@@ -45,7 +44,7 @@ export default function Login() {
                             className="mt-1 block w-full"
                             placeholder="Ingresa tu correo"
                             value={emailInput}
-                            onChange={(e) => setEmailInput(e.target.value)} // Actualizamos el estado del email
+                            onChange={(e) => setEmailInput(e.target.value)}
                         />
                         {errors.length > 0 && <InputError message={errors[0]} className="mt-2" />}
                     </div>
@@ -60,7 +59,7 @@ export default function Login() {
                             className="mt-1 block w-full"
                             placeholder="Ingresa tu contraseña"
                             value={passwordInput}
-                            onChange={(e) => setPasswordInput(e.target.value)} // Actualizamos el estado de la contraseña
+                            onChange={(e) => setPasswordInput(e.target.value)}
                         />
                         {errors.length > 0 && <InputError message={errors[0]} className="mt-2" />}
                     </div>

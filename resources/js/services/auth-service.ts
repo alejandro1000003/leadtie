@@ -13,7 +13,16 @@ export const login = async (email: string, password: string) => {
 };
 
 // Logout
-export const logout = () => {
+export const logout = async () => {
+  const token = localStorage.getItem('tokenCRM');
+  if (token) {
+    try {
+      await axios.post(`${API_URL}/logout`);
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  }
+
   localStorage.removeItem('tokenCRM');
   delete axios.defaults.headers.common['Authorization'];
 };
