@@ -39,10 +39,23 @@ export interface Client {
   phone: string | null;
   address: string | null;
   company_name: string | null;
+  created_at: string;
+  updated_at: string;
+  last_page: number;
+}
+
+export interface PaginatedClients {
+  current_page: number;
+  data: Client[];
+  last_page: number;
+  per_page: number;
+  total: number;
 }
 
 // Función para obtener la lista de clientes (GET)
-export const getClients = async (params: Record<string, any> = {}): Promise<any> => {
+export const getClients = async (
+  params: Record<string, any> = {}
+): Promise<PaginatedClients | null> => {
   try {
     const response = await api.get('/clients', { params });
     return handleResponse(response);
