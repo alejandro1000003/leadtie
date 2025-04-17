@@ -1,8 +1,6 @@
-# # Obtener clientes (default 15)
-GET http://127.0.0.1:8000/api/clients
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQzNzY3MjY1LCJleHAiOjE3NDM3NzA4NjUsIm5iZiI6MTc0Mzc2NzI2NSwianRpIjoiTWVpUUN5RjRxQ3dWRkphMyIsInN1YiI6IjE0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.6inBT6Mhs2GwF4BCfiS5Fnvz2Ud8X9G82c9RsiLjmoo
-
-
+# # # Obtener clientes (default 15)
+# GET http://127.0.0.1:8000/api/clients
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQzNzY3MjY1LCJleHAiOjE3NDM3NzA4NjUsIm5iZiI6MTc0Mzc2NzI2NSwianRpIjoiTWVpUUN5RjRxQ3dWRkphMyIsInN1YiI6IjE0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.6inBT6Mhs2GwF4BCfiS5Fnvz2Ud8X9G82c9RsiLjmoo
 
 # # Obtener cliente por ID
 # GET http://127.0.0.1:8000/api/clients/1
@@ -21,6 +19,10 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vM
 
 # # Filtrado por nombre de empresa
 # GET http://127.0.0.1:8000/api/clients?page=1&company_name=Smith Co.
+
+# # Filtrado por dirección
+# GET http://127.0.0.1:8000/api/clients?address=Glenda
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ0ODk5ODc5LCJleHAiOjE3NDQ5MDA0NzksIm5iZiI6MTc0NDg5OTg3OSwianRpIjoiOXh3ZThyb3NsbmZOTW92ZCIsInN1YiI6IjEyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.yZA6fLMUvs9adsoSq5jTeJvfZjn8h8UmrAw5iLuURPU
 
 # # Ordenar clientes por nombre de empresa (ascendente)
 # GET http://127.0.0.1:8000/api/clients?page=1&order_by=company_name

@@ -23,7 +23,12 @@ export default defineConfig({
         },
     },
     server: {
-        host: '0.0.0.0', // Escucha en todas las interfaces
-        port: 3000,      // O el puerto que prefieras
-    },
+        proxy: {
+          '/api': {
+            target: 'http://localhost:8000',
+            changeOrigin: true,
+            secure: false
+          }
+        }
+      }
 });
