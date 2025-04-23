@@ -14,19 +14,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex flex-row-reverse md:flex-col items-center gap-5">
+    <nav className="flex h-full flex-row-reverse md:flex-col items-center gap-5">
       <div className="text-white font-bold">CRM</div>
+      
+      {/* separador */}
+      <div className='h-full'></div>
+
       <Link href="/profile" className="text-gray-300 hover:text-white">
         <img src={usuarioImg} alt="Profile" className="w-8 h-8" />
       </Link>
       
-      {/* Cambiar el form por un botón que llame a handleLogout */}
       <button
         onClick={handleLogout}
         className="text-gray-300 hover:text-red-400 relative w-8 h-8 group"
       >
         <img src={cerrarSessionImg} alt="Cerrar sesión" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-80 transition duration-300 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-88 transition duration-300 mix-blend-multiply rounded-full"></div>
       </button>
     </nav>
   );

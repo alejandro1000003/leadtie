@@ -11,7 +11,7 @@ use App\Http\Middleware\IsAdmin;
 
 
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('throttle:10,1')->post('/login', [AuthController::class, 'login']);
 Route::post('/refresh', [AuthController::class, 'refresh']);
 Route::post('/getuser', [AuthController::class, 'getUser']);
 

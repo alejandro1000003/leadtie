@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from '@inertiajs/react';
 import apiService, { Client } from '../services/api-service';
 import PaginationComponent from '../components/pagination';
+import ErrorPage from './error-page';
 
 const ClientesList: React.FC = () => {
     const [clientes, setClientes] = useState<Client[]>([]);
@@ -53,10 +54,11 @@ const ClientesList: React.FC = () => {
         fetchClientes();
     }, []);
 
+    if (error) return <ErrorPage />;
+
     return (
         <div className="p-6 mx-auto">
             {loading && <p className="text-gray-600">Cargando clientes...</p>}
-            {error && <p className="text-red-500">Error: {error}</p>}
 
             {/* Filtros */}
             <nav className="mb-6 flex items-center justify-between space-x-2 border px-2 py-2 rounded-lg">

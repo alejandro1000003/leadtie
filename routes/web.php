@@ -18,3 +18,7 @@ Route::get('/dashboard', function () {
 Route::get('/clientes', function () {
     return Inertia::render('clientes');
 });
+
+Route::get('/oportunidades', function () {
+    return Inertia::render('oportunidades');
+});
