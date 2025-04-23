@@ -22,3 +22,7 @@ Route::get('/clientes', function () {
 Route::get('/oportunidades', function () {
     return Inertia::render('oportunidades');
 });
+
+Route::get('/tareas', function () {
+    return Inertia::render('tareas');
+});

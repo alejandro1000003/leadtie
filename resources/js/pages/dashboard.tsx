@@ -15,8 +15,8 @@ const sales_chart = [
 export default function Dashboard() {
   return (
   <>
-    <div className="flex w-full p-4 flex-col md:flex-row min-h-screen">
-      <div className="flex-wrap bg-gray-800 p-5">
+    <div className="flex w-full p-4 flex-col md:flex-row min-h-screen  ">
+      <div className="flex-wrap bg-gray-800 p-3 border-5 border-gray-100">
         <Navbar/>
       </div>
       

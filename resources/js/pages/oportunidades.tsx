@@ -1,109 +1,115 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faUser, faEuroSign, faCheckCircle, faClock, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-const Oportunidades = () => {
+interface Tarea {
+  id: number;
+  descripcion: string;
+}
+
+interface Oportunidad {
+  titulo: string;
+  cliente: string;
+  valor: number;
+  estado: 'Abierta' | 'En progreso' | 'Cerrada';
+  tareas: Tarea[];
+}
+
+const Oportunidades: React.FC = () => {
   // Estado con datos de ejemplo
-  const [oportunidades, setOportunidades] = useState([
-    { titulo: 'Venta a Acme', cliente: 'Acme Corp', valor: 12000, estado: 'Abierta' },
-    { titulo: 'Consultoría ERP', cliente: 'Globex', valor: 22000, estado: 'En progreso' },
-    { titulo: 'Mantenimiento anual', cliente: 'SoyTech', valor: 5000, estado: 'Cerrada' },
+  const [oportunidades, setOportunidades] = useState<Oportunidad[]>([
+    {
+      titulo: 'Venta a Acme',
+      cliente: 'Acme Corp',
+      valor: 12000,
+      estado: 'Abierta',
+      tareas: [
+        { id: 1, descripcion: 'Llamar a Acme para confirmar detalles' },
+        { id: 2, descripcion: 'Enviar propuesta inicial' },
+      ],
+    },
+    {
+      titulo: 'Consultoría ERP',
+      cliente: 'Globex',
+      valor: 22000,
+      estado: 'En progreso',
+      tareas: [
+        { id: 1, descripcion: 'Reunión inicial con el equipo de Globex' },
+        { id: 2, descripcion: 'Enviar presupuesto detallado' },
+      ],
+    },
+    {
+      titulo: 'Mantenimiento anual',
+      cliente: 'SoyTech',
+      valor: 5000,
+      estado: 'Cerrada',
+      tareas: [
+        { id: 1, descripcion: 'Realizar revisión de software' },
+        { id: 2, descripcion: 'Enviar informe final' },
+      ],
+    },
   ]);
 
+  const estadoIconos = {
+    Abierta: faCheckCircle,
+    'En progreso': faClock,
+    Cerrada: faTimesCircle,
+  };
+
   return (
-    <>
-    {/* Filtros */}
-    <nav className="mb-6 flex items-center justify-between space-x-2 border p-4 rounded-lg bg-gray-800">
-    <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold">
-        🏠 Volver a Dashboard
-    </Link>
-
-    <form
-        className="filters flex items-center space-x-4"
-        onSubmit={(e) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const queryParams = new URLSearchParams();
-
-        formData.forEach((value, key) => {
-            if (value) {
-            queryParams.set(key, value.toString());
-            }
-        });
-
-        window.location.href = `${window.location.pathname}?${queryParams.toString()}`;
-        }}
-    >
-        <input
-        type="number"
-        name="per_page"
-        placeholder="nº registros"
-        className="border border-gray-400 px-2 py-1 text-sm rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-        min="1"
-        />
-        <input
-        type="text"
-        name="first_name"
-        placeholder="Nombre"
-        className="border border-gray-400 px-2 py-1 text-sm rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-        />
-        <input
-        type="text"
-        name="last_name"
-        placeholder="Apellido"
-        className="border border-gray-400 px-2 py-1 text-sm rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-        />
-        <input
-        type="email"
-        name="email"
-        placeholder="Correo"
-        className="border border-gray-400 px-2 py-1 text-sm rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-        />
-        <input
-        type="text"
-        name="address"
-        placeholder="Dirección"
-        className="border border-gray-400 px-2 py-1 text-sm rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-        />
-        <input
-        type="text"
-        name="company_name"
-        placeholder="Empresa"
-        className="border border-gray-400 px-2 py-1 text-sm rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <button
-        type="submit"
-        className="border px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    <div className="bg-gray-100 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center text-blue-600 hover:underline font-semibold mb-4"
         >
-        ⌕
-        </button>
-        <button
-        type="button"
-        className="border px-3 py-1 rounded bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-        onClick={() => {
-            window.location.href = window.location.pathname;
-        }}
-        >
-        ↻
-        </button>
-    </form>
-    </nav>
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard
+        </Link>
 
-    <div className="p-6 max-w-3xl mx-auto">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Oportunidades de Venta</h2>
 
-      <h2 className="text-2xl font-bold mb-4 text-white">Gestión de Oportunidades</h2>
-
-      <ul className="space-y-4">
-        {oportunidades.map((o, i) => (
-            <li key={i} className="bg-gray-700 p-4 rounded text-white">
-            <h3 className="text-lg font-bold">{o.titulo}</h3>
-            <p>Cliente: {o.cliente}</p>
-            <p>Valor: €{o.valor}</p>
-            <p>Estado: {o.estado}</p>
-          </li>
-        ))}
-      </ul>
+        <div className="space-y-4">
+          {oportunidades.map((o, i) => (
+            <div key={i} className="bg-white shadow overflow-hidden rounded-md">
+              <div className="px-4 py-5 sm:p-6">
+                <h3 className="text-lg leading-6 font-medium text-gray-900">{o.titulo}</h3>
+                <div className="mt-2 text-sm text-gray-500">
+                  <p className="mb-1">
+                    <FontAwesomeIcon icon={faUser} className="mr-1" /> Cliente: {o.cliente}
+                  </p>
+                  <p className="mb-1">
+                    <FontAwesomeIcon icon={faEuroSign} className="mr-1" /> Valor: {o.valor}
+                  </p>
+                  <p>
+                  <FontAwesomeIcon icon={estadoIconos[o.estado]} className="mr-1" />Estado:
+                    <span
+                      className={
+                        o.estado === 'Abierta'
+                          ? 'text-green-500'
+                          : o.estado === 'En progreso'
+                          ? 'text-yellow-600'
+                          : 'text-red-500'
+                      }
+                    >
+                      {o.estado}
+                    </span>
+                  </p>
+                </div>
+                <div className="mt-4">
+                  <h4 className="text-sm font-semibold text-gray-700">Tareas:</h4>
+                  <ul className="list-disc list-inside text-sm text-gray-500 mt-1">
+                    {o.tareas.map((t) => (
+                      <li key={t.id}>{t.descripcion}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-    </>
   );
 };
 
