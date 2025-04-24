@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUser, faEuroSign, faCheckCircle, faClock, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUser, faEuroSign, faCheckCircle, faClock, faTimesCircle, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface Tarea {
   id: number;
@@ -9,17 +9,18 @@ interface Tarea {
 }
 
 interface Oportunidad {
+  id: number;
   titulo: string;
   cliente: string;
   valor: number;
-  estado: 'Abierta' | 'En progreso' | 'Cerrada';
+  estado: 'Abierta' | 'En progreso' | 'Venta' | 'Perdida';
   tareas: Tarea[];
 }
 
 const Oportunidades: React.FC = () => {
-  // Estado con datos de ejemplo
   const [oportunidades, setOportunidades] = useState<Oportunidad[]>([
     {
+      id: 1,
       titulo: 'Venta a Acme',
       cliente: 'Acme Corp',
       valor: 12000,
@@ -30,6 +31,7 @@ const Oportunidades: React.FC = () => {
       ],
     },
     {
+      id: 2,
       titulo: 'Consultoría ERP',
       cliente: 'Globex',
       valor: 22000,
@@ -40,10 +42,11 @@ const Oportunidades: React.FC = () => {
       ],
     },
     {
+      id: 3,
       titulo: 'Mantenimiento anual',
       cliente: 'SoyTech',
       valor: 5000,
-      estado: 'Cerrada',
+      estado: 'Venta',
       tareas: [
         { id: 1, descripcion: 'Realizar revisión de software' },
         { id: 2, descripcion: 'Enviar informe final' },
@@ -52,9 +55,17 @@ const Oportunidades: React.FC = () => {
   ]);
 
   const estadoIconos = {
-    Abierta: faCheckCircle,
+    'Abierta': faCheckCircle,
     'En progreso': faClock,
-    Cerrada: faTimesCircle,
+    'Venta': faCheckCircle,
+    'Perdida': faTimesCircle,
+  };
+
+  const handleEstadoChange = (event: React.ChangeEvent<HTMLSelectElement>, id: number) => {
+    const nuevoEstado = event.target.value as 'Abierta' | 'En progreso' | 'Venta' | 'Perdida';
+    setOportunidades(oportunidades.map(oportunidad =>
+      oportunidad.id === id ? { ...oportunidad, estado: nuevoEstado } : oportunidad
+    ));
   };
 
   return (
@@ -66,12 +77,10 @@ const Oportunidades: React.FC = () => {
         >
           <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard
         </Link>
-
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Oportunidades de Venta</h2>
-
         <div className="space-y-4">
-          {oportunidades.map((o, i) => (
-            <div key={i} className="bg-white shadow overflow-hidden rounded-md">
+          {oportunidades.map((o) => (
+            <div key={o.id} className="bg-white shadow overflow-hidden rounded-md relative">
               <div className="px-4 py-5 sm:p-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">{o.titulo}</h3>
                 <div className="mt-2 text-sm text-gray-500">
@@ -81,19 +90,36 @@ const Oportunidades: React.FC = () => {
                   <p className="mb-1">
                     <FontAwesomeIcon icon={faEuroSign} className="mr-1" /> Valor: {o.valor}
                   </p>
-                  <p>
-                  <FontAwesomeIcon icon={estadoIconos[o.estado]} className="mr-1" />Estado:
+                  <p className="flex items-center">
+                    <FontAwesomeIcon icon={estadoIconos[o.estado]} className="mr-1" /> Estado:
                     <span
                       className={
                         o.estado === 'Abierta'
-                          ? 'text-green-500'
+                          ? 'text-green-500 ml-1'
                           : o.estado === 'En progreso'
-                          ? 'text-yellow-600'
-                          : 'text-red-500'
+                          ? 'text-yellow-600 ml-1'
+                          : o.estado === 'Venta'
+                          ? 'text-green-700 ml-1'
+                          : o.estado === 'Perdida'
+                          ? 'text-red-700 ml-1'
+                          : 'text-gray-500 ml-1' // Estado por defecto
                       }
                     >
                       {o.estado}
                     </span>
+                      <div className="relative ml-2">
+                        <FontAwesomeIcon icon={faPencilAlt} className="cursor-pointer" />
+                        <select
+                          value={o.estado}
+                          onChange={(e) => handleEstadoChange(e, o.id)}
+                          className="absolute top-0 left-0 w-full opacity-0 cursor-pointer"
+                        >
+                          <option value="Abierta">Abierta</option>
+                          <option value="En progreso">En progreso</option>
+                          <option value="Venta">Venta</option>
+                          <option value="Perdida">Perdida</option>
+                        </select>
+                      </div>
                   </p>
                 </div>
                 <div className="mt-4">
@@ -105,6 +131,19 @@ const Oportunidades: React.FC = () => {
                   </ul>
                 </div>
               </div>
+              {o.estado !== 'Abierta' && o.estado !== 'En progreso' && (
+                <div className="absolute top-2 right-2 flex space-x-2">
+                  {o.estado === 'Venta' ? (
+                    <span className="bg-green-500 text-white font-bold py-2 px-4 rounded text-sm">
+                      Venta
+                    </span>
+                  ) : o.estado === 'Perdida' ? (
+                    <span className="bg-red-500 text-white font-bold py-2 px-4 rounded text-sm">
+                      Perdida
+                    </span>
+                  ) : null}
+                </div>
+              )}
             </div>
           ))}
         </div>
