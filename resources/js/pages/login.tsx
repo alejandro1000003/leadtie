@@ -33,20 +33,15 @@ export default function Login() {
         <>
             <Head title="Login" />
             <div className="flex min-h-screen items-center justify-center">
-                <form
-                    className="space-y-6 w-full max-w-md p-8 bg-white rounded-xl border-5 border-gray-400"
-                    onSubmit={handleSubmit}
-                >
-                    <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Iniciar sesión</h2>
-                    
+                <form className="space-y-6 w-full max-w-md" onSubmit={handleSubmit}>
                     <div>
-                        <Label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                        <Label htmlFor="email" className="block text-sm font-medium">
                             Correo Electrónico
                         </Label>
                         <Input
                             id="email"
                             type="email"
-                            className="mt-1 block w-full border-gray-300 rounded-lg p-3 text-gray-800 focus:ring-indigo-600 focus:border-indigo-600"
+                            className="mt-1 block w-full"
                             placeholder="Ingresa tu correo"
                             value={emailInput}
                             onChange={(e) => setEmailInput(e.target.value)}
@@ -55,13 +50,13 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <Label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        <Label htmlFor="password" className="block text-sm font-medium">
                             Contraseña
                         </Label>
                         <Input
                             id="password"
                             type="password"
-                            className="mt-1 block w-full border-gray-300 rounded-lg p-3 text-gray-800 focus:ring-indigo-600 focus:border-indigo-600"
+                            className="mt-1 block w-full"
                             placeholder="Ingresa tu contraseña"
                             value={passwordInput}
                             onChange={(e) => setPasswordInput(e.target.value)}
@@ -70,14 +65,10 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <Button 
-                            type="submit" 
-                            className="w-full bg-gray-800 text-white py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-gray-700 transition duration-300 ease-in-out"
-                        >
+                        <Button type="submit" className="w-full">
                             Iniciar sesión
                         </Button>
                     </div>
-
                 </form>
             </div>
         </>
