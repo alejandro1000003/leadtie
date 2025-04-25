@@ -6,9 +6,9 @@ interface PaginationProps {
 const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
 
     return (
-        <div className="mt-6 flex justify-center gap-2 flex-wrap">
+        <div className="mt-6 flex justify-center gap-2 flex-wrap mb-5">
         <button
-            className="px-3 py-1 bg-[#8884d8] text-white rounded hover:bg-gray-800 disabled:opacity-50"
+            className="px-3 py-1 bg-[#1f2937] text-white rounded hover:bg-gray-600 disabled:opacity-50"
             onClick={() => {
                 if (currentPage > 1) {
                     const queryParams = new URLSearchParams(window.location.search);
@@ -25,8 +25,8 @@ const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPage
                 key={num}
                 className={`px-3 py-1 rounded ${
                     num === currentPage
-                        ? 'bg-[#8884d8] text-white border-2 border-[#1f2937]'
-                        : 'bg-[#8884d8] text-white hover:bg-gray-800'
+                        ? 'bg-[white] border-2 border-white text-[#8884d8] font-bold'
+                        : 'bg-[#1f2937] text-white hover:bg-gray-600'
                 }`}
                 onClick={() => {
                     const queryParams = new URLSearchParams(window.location.search);
@@ -38,7 +38,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPage
             </button>
         ))}
         <button
-            className="px-3 py-1 bg-[#8884d8] text-white rounded hover:bg-gray-800 disabled:opacity-50"
+            className="px-3 py-1 bg-[#1f2937] text-white rounded hover:bg-gray-600 disabled:opacity-50"
             onClick={() => {
                 if (currentPage < totalPages) {
                     const queryParams = new URLSearchParams(window.location.search);

@@ -4,15 +4,15 @@ import apiService, { Client } from '../services/api-service';
 import PaginationComponent from '../components/pagination';
 import ErrorPage from './error-page';
 
-const ClientesList: React.FC = () => {
-    const [clientes, setClientes] = useState<Client[]>([]);
+const ClientsList: React.FC = () => {
+    const [clients, setClients] = useState<Client[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
 
     useEffect(() => {
-        const fetchClientes = async () => {
+        const fetchClients = async () => {
             setLoading(true);
             try {
                 const queryParams = new URLSearchParams(window.location.search);
@@ -38,28 +38,29 @@ const ClientesList: React.FC = () => {
                     setError('No se pudo obtener la lista de clientes');
                     return;
                 }
-                setClientes(data.data);
+
+                setClients(data.data);
                 setCurrentPage(data.current_page);
                 setTotalPages(data.last_page);
 
-            } catch (error: any) {
-                setError(error.message || 'Error fetching clients');
+            } catch (err: any) {
+                setError(err.message || 'Error fetching clients');
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchClientes();
+        fetchClients();
     }, []);
 
     if (error) return <ErrorPage />;
 
     return (
-        <div className="p-6 mx-auto bg-gray-100 rounded-lg"> {/* Fondo gris claro para el contenedor */}
+        <div className="p-6 mx-auto h-[100vh] bg-gray-100">
             {loading && <p className="text-gray-600">Cargando clientes...</p>}
 
             {/* Filtros */}
-            <nav className="mb-6 flex items-center justify-between space-x-2 border px-2 py-2 rounded-lg bg-white"> {/* Fondo blanco para los filtros */}
+            <nav className="mb-6 flex items-center justify-between space-x-2 border px-2 py-2 rounded-lg bg-white">
                 <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold">🏠 Volver a Dashboard</Link>
                 <form
                     className="filters flex items-center space-x-2 m-auto"
@@ -88,10 +89,13 @@ const ClientesList: React.FC = () => {
                 </form>
             </nav>
 
+
+            
+
             {/* Tabla */}
-            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white"> {/* Fondo blanco para la tabla */}
+            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
                 <table className="w-full table-auto text-sm text-gray-800">
-                    <thead className="bg-gray-800 text-white border-b"> {/* Encabezado gris oscuro con texto blanco */}
+                    <thead className="bg-gray-800 text-white border-b">
                         <tr>
                             {['ID', 'Nombre', 'Apellido', 'Email', 'Teléfono', 'Dirección', 'Compañía', 'Creado', 'Actualizado', 'Acciones'].map((col) => (
                                 <th key={col} className="px-3 py-2 text-left font-semibold">
@@ -101,17 +105,17 @@ const ClientesList: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {clientes.map((cliente, index) => (
-                            <tr key={cliente.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}> {/* Filas con fondo blanco o gris muy claro */}
-                                <td className="px-3 py-2">{cliente.id}</td>
-                                <td className="px-3 py-2">{cliente.first_name}</td>
-                                <td className="px-3 py-2">{cliente.last_name}</td>
-                                <td className="px-3 py-2">{cliente.email}</td>
-                                <td className="px-3 py-2">{cliente.phone}</td>
-                                <td className="px-3 py-2">{cliente.address}</td>
-                                <td className="px-3 py-2">{cliente.company_name}</td>
-                                <td className="px-3 py-2 text-xs text-gray-500">{cliente.created_at}</td>
-                                <td className="px-3 py-2 text-xs text-gray-500">{cliente.updated_at}</td>
+                        {clients.map((client, index) => (
+                            <tr key={client.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                <td className="px-3 py-2">{client.id}</td>
+                                <td className="px-3 py-2">{client.first_name}</td>
+                                <td className="px-3 py-2">{client.last_name}</td>
+                                <td className="px-3 py-2">{client.email}</td>
+                                <td className="px-3 py-2">{client.phone}</td>
+                                <td className="px-3 py-2">{client.address}</td>
+                                <td className="px-3 py-2">{client.company_name}</td>
+                                <td className="px-3 py-2 text-xs text-gray-500">{client.created_at}</td>
+                                <td className="px-3 py-2 text-xs text-gray-500">{client.updated_at}</td>
                                 <td className="px-3 py-2 space-x-2">
                                     <button className="text-blue-600 hover:scale-110 transition">📝</button>
                                     <button className="text-red-600 hover:scale-110 transition">🗑️</button>
@@ -121,9 +125,11 @@ const ClientesList: React.FC = () => {
                     </tbody>
                 </table>
             </div>
+                        
             <PaginationComponent currentPage={currentPage} totalPages={totalPages} />
+           
         </div>
     );
 };
 
-export default ClientesList;
+export default ClientsList;
