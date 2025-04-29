@@ -69,7 +69,7 @@ const ClientsList: React.FC = () => {
             <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard</Link>
             
             {/* Filtros */}
-            <nav className="mb-6 flex items-center justify-between space-x-2 border px-2 py-2 rounded-lg bg-white mt-4 overflow-hidden max-h-96 transition-all duration-500 ease-in-out">
+            <nav className="bg-white mb-5 flex items-center justify-between space-x-2 border px-2 py-2  text-black border-black font-bold mt-4 overflow-hidden max-h-96 transition-all duration-500 ease-in-out">
                 <form
                     className="filters flex items-center space-x-2 m-auto"
                     onSubmit={(e) => {
@@ -101,9 +101,9 @@ const ClientsList: React.FC = () => {
             
 
             {/* Tabla */}
-            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-                <table className="w-full table-auto text-sm text-gray-800">
-                    <thead className="bg-gray-800 text-white border-b">
+            <div className="overflow-x-auto border border-gray-200 bg-white">
+                <table className="w-full table-auto text-sm text-gray-800 ">
+                    <thead className="bg-gray-800 text-white border-b ">
                         <tr>
                             {['ID', 'Nombre', 'Apellido', 'Email', 'Teléfono', 'Dirección', 'Compañía', 'Creado', 'Actualizado', 'Acciones'].map((col) => (
                                 <th key={col} className="px-3 py-2 text-left font-semibold">

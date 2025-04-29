@@ -6,7 +6,7 @@ interface PaginationProps {
 const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
 
     return (
-        <div className="mt-6 flex justify-center gap-2 flex-wrap">
+        <div className="mt-6 flex justify-center gap-2 flex-wrap ">
         <button
             className="px-3 py-1 bg-[#8884d8] text-white rounded hover:bg-gray-800 disabled:opacity-50"
             onClick={() => {
