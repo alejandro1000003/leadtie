@@ -3,6 +3,13 @@ import { Link } from '@inertiajs/react';
 import apiService, { Client } from '../services/api-service';
 import PaginationComponent from '../components/pagination';
 import ErrorPage from './error-page';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
+const formatearFecha = (f: string) => {
+    const d = new Date(f);
+    return `${d.getUTCDate().toString().padStart(2, '0')}-${(d.getUTCMonth() + 1).toString().padStart(2, '0')}-${d.getUTCFullYear()}`;
+};
 
 const ClientsList: React.FC = () => {
     const [clients, setClients] = useState<Client[]>([]);
@@ -59,9 +66,10 @@ const ClientsList: React.FC = () => {
         <div className="p-6 mx-auto h-[100vh] bg-gray-100">
             {loading && <p className="text-gray-600">Cargando clientes...</p>}
 
+            <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard</Link>
+            
             {/* Filtros */}
-            <nav className="mb-6 flex items-center justify-between space-x-2 border px-2 py-2 rounded-lg bg-white">
-                <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold">🏠 Volver a Dashboard</Link>
+            <nav className="mb-6 flex items-center justify-between space-x-2 border px-2 py-2 rounded-lg bg-white mt-4 overflow-hidden max-h-96 transition-all duration-500 ease-in-out">
                 <form
                     className="filters flex items-center space-x-2 m-auto"
                     onSubmit={(e) => {
@@ -114,8 +122,8 @@ const ClientsList: React.FC = () => {
                                 <td className="px-3 py-2">{client.phone}</td>
                                 <td className="px-3 py-2">{client.address}</td>
                                 <td className="px-3 py-2">{client.company_name}</td>
-                                <td className="px-3 py-2 text-xs text-gray-500">{client.created_at}</td>
-                                <td className="px-3 py-2 text-xs text-gray-500">{client.updated_at}</td>
+                                <td className="px-3 py-2 text-xs text-gray-500 collapsible">{formatearFecha(client.created_at)}</td>
+                                <td className="px-3 py-2 text-xs text-gray-500 collapsible">{formatearFecha(client.updated_at)}</td>
                                 <td className="px-3 py-2 space-x-2">
                                     <button className="text-blue-600 hover:scale-110 transition">📝</button>
                                     <button className="text-red-600 hover:scale-110 transition">🗑️</button>

@@ -29,28 +29,30 @@ export default function Navbar() {
       {/* separador */}
       <div className='h-full'></div>
 
-      <button onClick={toggleModal} className="text-gray-300 hover:text-white">
+      <button 
+        onClick={toggleModal} 
+        className="text-gray-300 hover:text-white hover:cursor-pointer"
+      >
         <img src={usuarioImg} alt="Profile" className="w-6 h-6" />
       </button>
 
       {/* Botón de cerrar sesión */}
       <button
         onClick={handleLogout}
-        className="text-gray-300 hover:text-red-400 relative w-6 h-6 group"
-        >
+        className="text-gray-300 hover:text-red-400 relative w-6 h-6 group hover:cursor-pointer"
+      >
         <img src={cerrarSessionImg} alt="Cerrar sesión" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-88 transition duration-300 mix-blend-multiply rounded-full"></div>
       </button>
     </nav>
       
     {isModalOpen && (
-      <div className="absolute top-6 right-0 bg-white p-4 shadow-md rounded-lg mr-5">
+      <div className="absolute bottom-4 left-18 bg-white p-4 shadow-md border rounded-lg mr-5">
         <div className="text-black">
-        <p className="font-bold">Información del usuario</p> {/* Texto en negrita */}
+        <span className="font-bold">Información del usuario</span> {/* Texto en negrita */}
         <UserData />
         </div>
       </div>
-      
     )}
     </>
   );

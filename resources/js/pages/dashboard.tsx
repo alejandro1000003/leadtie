@@ -15,8 +15,9 @@ const sales_chart = [
 export default function Dashboard() {
   return (
   <>
-    <div className="flex w-full p-4 flex-col md:flex-row min-h-screen  ">
-      <div className="flex-wrap bg-gray-800 p-3 border-5 border-gray-100">
+    <div className="flex flex-col md:flex-row h-screen">
+
+      <div className="flex-wrap bg-gray-800 p-3">
         <Navbar/>
       </div>
       
@@ -29,49 +30,49 @@ export default function Dashboard() {
           </CardHeader>
         </Card>
 
-        <Card className="col-span-3 md:col-span-1">
-        <CardHeader>
-            <CardTitle className="text-xl font-semibold mb-2">Clientes</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl text-[#8884d8]">400</p>
-          </CardContent>
-          <CardFooter>
-            <Link href="/clientes">
-              <Button variant="outline" className="mt-4 w-full">Ver Clientes</Button>
-            </Link>
-          </CardFooter>
-        </Card>
-
-        <Card className="col-span-3 md:col-span-1">
+        <Card className="col-span-3 md:col-span-1 text-center">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold mb-2">Oportunidades</CardTitle>
+            <CardTitle className="text-xl font-semibold mb-2 text-center">Clientes</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl text-[#8884d8]">26 abiertas</p>
+            <span className="text-3xl text-[#8884d8]">400</span>
           </CardContent>
           <CardFooter>
-            <Link href="/oportunidades">
-              <Button variant="outline" className="mt-4 w-full">Ver oportunidades</Button>
+            <Link href="/clients" className="w-full">
+              <Button variant="outline" className="mt-4 w-[80%] p-5">Ver Clientes</Button>
             </Link>
           </CardFooter>
         </Card>
 
-        <Card className="col-span-3 md:col-span-1">
+        <Card className="col-span-3 md:col-span-1 text-center">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold mb-2">Tareas</CardTitle>
+            <CardTitle className="text-xl font-semibold mb-2 text-center">Oportunidades</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl text-[#8884d8]">12 pendientes</p>
+            <span className="text-3xl text-[#8884d8]">26 abiertas</span>
           </CardContent>
           <CardFooter>
-            <Link href="/tareas">
-              <Button variant="outline" className="mt-4 w-full">Ver tareas</Button>
+            <Link href="/opportunities" className="w-full">
+              <Button variant="outline" className="mt-4 w-[80%] p-5">Ver oportunidades</Button>
             </Link>
           </CardFooter>
         </Card>
 
-        <Card className="col-span-3">
+        <Card className="col-span-3 md:col-span-1 text-center">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold mb-2 text-center">Tareas</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <span className="text-3xl text-[#8884d8]">12 pendientes</span>
+          </CardContent>
+          <CardFooter>
+            <Link href="/tasks" className="w-full">
+              <Button variant="outline" className="mt-4 w-[80%] p-5">Ver tareas</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card className="col-span-3 text-center">
           <CardHeader>
             <CardTitle className="text-xl font-semibold mb-4">Ventas Mensuales</CardTitle>
           </CardHeader>

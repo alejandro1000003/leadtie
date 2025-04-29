@@ -5,23 +5,32 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+  completed: boolean;
+  opportunity: string;
+  created: string; // New property
+}
+
 export default function TaskManager() {
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
       title: "Llamar a cliente",
       description: "Confirmar detalles de la propuesta",
       completed: false,
-      client: "Cliente A",
       opportunity: "Oportunidad 1",
+      created: "2023-10-01", // Example date
     },
     {
       id: 2,
       title: "Enviar propuesta",
       description: "Enviar propuesta con condiciones acordadas",
       completed: true,
-      client: "Cliente B",
       opportunity: "Oportunidad 2",
+      created: "2023-09-28", // Example date
     },
   ]);
 
@@ -70,10 +79,10 @@ export default function TaskManager() {
                   </p>
                   <div className="mt-2 text-sm text-gray-500">
                     <p>
-                      <strong>Cliente:</strong> {task.client}
+                      <strong>Oportunidad:</strong> {task.opportunity}
                     </p>
                     <p>
-                      <strong>Oportunidad:</strong> {task.opportunity}
+                      <strong>Creado:</strong> {task.created}
                     </p>
                   </div>
                 </div>

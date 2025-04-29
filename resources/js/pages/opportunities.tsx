@@ -11,18 +11,18 @@ import {
   faPencilAlt
 } from '@fortawesome/free-solid-svg-icons';
 
-interface Task {
+type Task = {
   id: number;
   description: string;
 }
 
-interface Opportunity {
+type Opportunity = {
   id: number;
   title: string;
-  client: string;
+  client_id: string;
   value: number;
   status: 'Open' | 'In Progress' | 'Won' | 'Lost';
-  tasks: Task[];
+  tasks: Task[]; // esto se obtiene a parte, gracias a la relación, pero no forma parte de la tabla "Opportunity"
 }
 
 const Opportunities: React.FC = () => {
@@ -30,7 +30,7 @@ const Opportunities: React.FC = () => {
     {
       id: 1,
       title: 'Sale to Acme',
-      client: 'Acme Corp',
+      client_id: 'Acme Corp',
       value: 12000,
       status: 'Open',
       tasks: [
@@ -41,7 +41,7 @@ const Opportunities: React.FC = () => {
     {
       id: 2,
       title: 'ERP Consulting',
-      client: 'Globex',
+      client_id: 'Globex',
       value: 22000,
       status: 'In Progress',
       tasks: [
@@ -52,7 +52,7 @@ const Opportunities: React.FC = () => {
     {
       id: 3,
       title: 'Annual Maintenance',
-      client: 'SoyTech',
+      client_id: 'SoyTech',
       value: 5000,
       status: 'Won',
       tasks: [
@@ -96,7 +96,7 @@ const Opportunities: React.FC = () => {
                 <h3 className="text-lg leading-6 font-medium text-gray-900">{o.title}</h3>
                 <div className="mt-2 text-sm text-gray-500">
                   <p className="mb-1">
-                    <FontAwesomeIcon icon={faUser} className="mr-1" /> Cliente: {o.client}
+                    <FontAwesomeIcon icon={faUser} className="mr-1" /> Cliente: {o.client_id}
                   </p>
                   <p className="mb-1">
                     <FontAwesomeIcon icon={faEuroSign} className="mr-1" /> Valor: {o.value}

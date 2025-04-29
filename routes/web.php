@@ -15,14 +15,14 @@ Route::get('/dashboard', function () {
     return Inertia::render('dashboard');
 });
 
-Route::get('/clientes', function () {
-    return Inertia::render('clientes');
+Route::get('/clients', function () {
+    return Inertia::render('clients');
 });
 
-Route::get('/oportunidades', function () {
-    return Inertia::render('oportunidades');
+Route::get('/opportunities', function () {
+    return Inertia::render('opportunities');
 });
 
-Route::get('/tareas', function () {
-    return Inertia::render('tareas');
+Route::get('/tasks', function () {
+    return Inertia::render('tasks');
 });

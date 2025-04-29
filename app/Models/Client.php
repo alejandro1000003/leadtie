@@ -30,4 +30,10 @@ class Client extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relation: a client has many opportunities
+    public function opportunities(): HasMany
+    {
+        return $this->hasMany(Opportunity::class);
+    }
 }
