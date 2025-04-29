@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from '@inertiajs/react';
-import apiService, { Client } from '../services/api-service';
+import apiService, { Client } from '../services/client-api-service';
 import PaginationComponent from '../components/pagination';
 import ErrorPage from './error-page';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

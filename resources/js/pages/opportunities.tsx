@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from '@inertiajs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,11 +10,7 @@ import {
   faTimesCircle,
   faPencilAlt
 } from '@fortawesome/free-solid-svg-icons';
-
-type Task = {
-  id: number;
-  description: string;
-}
+import { getOpportunities } from '../services/opportunities-api-service'; // Importamos el servicio
 
 type Opportunity = {
   id: number;
@@ -22,45 +18,38 @@ type Opportunity = {
   client_id: string;
   value: number;
   status: 'Open' | 'In Progress' | 'Won' | 'Lost';
-  tasks: Task[]; // esto se obtiene a parte, gracias a la relación, pero no forma parte de la tabla "Opportunity"
+  // tasks?: Task[]; // Si en algún momento vuelves a necesitar las tareas, puedes dejar esto opcional
 }
 
 const Opportunities: React.FC = () => {
-  const [opportunities, setOpportunities] = useState<Opportunity[]>([
-    {
-      id: 1,
-      title: 'Sale to Acme',
-      client_id: 'Acme Corp',
-      value: 12000,
-      status: 'Open',
-      tasks: [
-        { id: 1, description: 'Call Acme to confirm details' },
-        { id: 2, description: 'Send initial proposal' },
-      ],
-    },
-    {
-      id: 2,
-      title: 'ERP Consulting',
-      client_id: 'Globex',
-      value: 22000,
-      status: 'In Progress',
-      tasks: [
-        { id: 1, description: 'Initial meeting with Globex team' },
-        { id: 2, description: 'Send detailed budget' },
-      ],
-    },
-    {
-      id: 3,
-      title: 'Annual Maintenance',
-      client_id: 'SoyTech',
-      value: 5000,
-      status: 'Won',
-      tasks: [
-        { id: 1, description: 'Perform software review' },
-        { id: 2, description: 'Send final report' },
-      ],
-    },
-  ]);
+  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+  const [loading, setLoading] = useState(true); // Estado para indicar la carga
+  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+
+  useEffect(() => {
+    const fetchOpportunities = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await getOpportunities();
+        // Asumimos que la respuesta tiene una estructura como { data: [...] }
+        setOpportunities(response.data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          client_id: item.client_id?.toString() || '', // Aseguramos que client_id sea string
+          value: item.value,
+          status: item.status,
+        })));
+      } catch (err: any) {
+        console.error("Error fetching opportunities:", err);
+        setError("Failed to load opportunities.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOpportunities();
+  }, []);
 
   const statusIcons = {
     'Open': faCheckCircle,
@@ -77,7 +66,17 @@ const Opportunities: React.FC = () => {
     setOpportunities(opportunities.map(o =>
       o.id === id ? { ...o, status: newStatus } : o
     ));
+    // Aquí iría la lógica para actualizar el estado en el backend
+    console.log(`Opportunity ${id} status changed to: ${newStatus}`);
   };
+
+  if (loading) {
+    return <div>Loading opportunities...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
@@ -133,14 +132,7 @@ const Opportunities: React.FC = () => {
                     </div>
                   </p>
                 </div>
-                <div className="mt-4">
-                  <h4 className="text-sm font-semibold text-gray-700">Tareas:</h4>
-                  <ul className="list-disc list-inside text-sm text-gray-500 mt-1">
-                    {o.tasks.map((t) => (
-                      <li key={t.id}>{t.description}</li>
-                    ))}
-                  </ul>
-                </div>
+                {/* La sección de tareas sigue eliminada */}
               </div>
               {o.status !== 'Open' && o.status !== 'In Progress' && (
                 <div className="absolute top-2 right-2 flex space-x-2">

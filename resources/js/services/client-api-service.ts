@@ -31,7 +31,7 @@ const handleError = (error: AxiosError): Promise<any> => {
 };
 
 // Tipos para los datos de los clientes
-export interface Client {
+export type Client = {
   id: number;
   first_name: string;
   last_name: string | null;
