@@ -32,8 +32,9 @@ export default function Login() {
     return (
         <>
             <Head title="Login" />
-            <div className="flex min-h-screen items-center justify-center">
-                <form className="space-y-6 w-full max-w-md" onSubmit={handleSubmit}>
+            <div className="flex min-h-screen items-center justify-center bg-gray-100">
+                <h1 className='hidden md:font-bold md:mr-15 md:block'>Login</h1>
+                <form className="space-y-6 w-full max-w-md border p-5 bg-white rounded-lg" onSubmit={handleSubmit}>
                     <div>
                         <Label htmlFor="email" className="block text-sm font-medium">
                             Correo Electrónico
@@ -65,7 +66,7 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full bg-gray-800">
                             Iniciar sesión
                         </Button>
                     </div>

@@ -21,7 +21,7 @@ class OpportunitySeeder extends Seeder
             // Crear una oportunidad
             $opportunity = Opportunity::create([
                 'title' => $faker->sentence,  // Título aleatorio
-                'client_id' => $faker->company,  // Nombre del cliente aleatorio
+                'client_id' => rand(1, 50),
                 'value' => $faker->randomFloat(2, 1000, 10000),  // Valor aleatorio entre 1000 y 10000
                 'status' => $faker->randomElement(['Open', 'In Progress', 'Won', 'Lost']),  // Estado aleatorio
                 'created_at' => now(),

@@ -1,0 +1,78 @@
+# Crear el contenido para el archivo .txt
+# Obtener oportunidades (por defecto 15)
+GET http://127.0.0.1:8000/api/opportunities
+# Authorization: Bearer {token}
+
+# Obtener oportunidad por ID
+# GET http://127.0.0.1:8000/api/opportunities/{id}
+# Authorization: Bearer {token}
+
+# Paginación (30 resultados por página)
+# GET http://127.0.0.1:8000/api/opportunities?page=2&per_page=30
+# Authorization: Bearer {token}
+
+# Filtrado por título
+# GET http://127.0.0.1:8000/api/opportunities?title=Opportunity Name
+# Authorization: Bearer {token}
+
+# Filtrado por valor
+# GET http://127.0.0.1:8000/api/opportunities?value=1000
+# Authorization: Bearer {token}
+
+# Filtrado por estado
+# GET http://127.0.0.1:8000/api/opportunities?status=Open
+# Authorization: Bearer {token}
+
+# Filtrado por client_id
+# GET http://127.0.0.1:8000/api/opportunities?client_id=1
+# Authorization: Bearer {token}
+
+# Ordenar oportunidades por título (ascendente)
+# GET http://127.0.0.1:8000/api/opportunities?page=1&order_by=title&direction=asc
+# Authorization: Bearer {token}
+
+# Ordenar oportunidades por valor (descendente)
+# GET http://127.0.0.1:8000/api/opportunities?page=1&order_by=value&direction=desc
+# Authorization: Bearer {token}
+
+# Filtrado y ordenación combinada
+# Buscar oportunidades con el título "Opportunity" y estado "Open", ordenadas por value de manera ascendente
+# GET http://127.0.0.1:8000/api/opportunities?title=Opportunity&status=Open&order_by=value&direction=asc
+# Authorization: Bearer {token}
+
+# Crear nueva oportunidad
+# POST http://127.0.0.1:8000/api/opportunities
+# Authorization: Bearer {token}
+# Content-Type: application/json
+# 
+# {
+#     "title": "New Opportunity",
+#     "value": 5000,
+#     "status": "Open",
+#     "client_id": 1
+# }
+
+# Actualizar oportunidad (PUT)
+# PUT http://127.0.0.1:8000/api/opportunities/{id}
+# Authorization: Bearer {token}
+# Content-Type: application/json
+# 
+# {
+#     "title": "Updated Opportunity Title",
+#     "value": 7000,
+#     "status": "In Progress",
+#     "client_id": 1
+# }
+
+# Actualizar parcialmente oportunidad (PATCH)
+# PATCH http://127.0.0.1:8000/api/opportunities/{id}
+# Authorization: Bearer {token}
+# Content-Type: application/json
+# 
+# {
+#     "status": "Won"
+# }
+
+# Eliminar oportunidad
+# DELETE http://127.0.0.1:8000/api/opportunities/{id}
+# Authorization: Bearer {token}
