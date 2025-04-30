@@ -11,7 +11,7 @@ import {
   faPencilAlt,
   faPhone,
 } from '@fortawesome/free-solid-svg-icons';
-import { getOpportunities } from '../services/opportunities-api-service'; // Importamos el servicio
+import { getOpportunities, updatePartialOpportunity } from '../services/opportunities-api-service'; // Importamos el servicio
 
 type Client = {
   id: number;
@@ -85,7 +85,7 @@ const Opportunities: React.FC = () => {
     'Lost': faTimesCircle,
   };
 
-  const handleStatusChange = (
+  const handleStatusChange = async (
     event: React.ChangeEvent<HTMLSelectElement>,
     id: number
   ) => {
@@ -93,8 +93,14 @@ const Opportunities: React.FC = () => {
     setOpportunities(opportunities.map(o =>
       o.id === id ? { ...o, status: newStatus } : o
     ));
-    // Aquí iría la lógica para actualizar el estado en el backend
-    console.log(`Opportunity ${id} status changed to: ${newStatus}`);
+
+    try {
+      await updatePartialOpportunity(id, { status: newStatus });
+      // console.log(`Opportunity ${id} status updated to: ${newStatus}`);
+    } catch (error) {
+      console.error(`Failed to update opportunity ${id} status:`, error);
+      setError(`Failed to update opportunity ${id} status.`);
+    }
   };
 
   if (loading) {
@@ -121,16 +127,16 @@ const Opportunities: React.FC = () => {
               <div className="px-4 py-5 sm:p-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">{o.title}</h3>
                 <div className="mt-2 text-sm text-gray-500">
-                  <p className="mb-1">
+                  <span className="block mb-1">
                     <FontAwesomeIcon icon={faUser} className="mr-1" /> Cliente:  <Link href={`/clients?email=${encodeURI(o.client.email)}`} className="text-blue-800">{o.client.first_name} {o.client.last_name}</Link> 
-                  </p>
-                  <p className="mb-1">
+                  </span>
+                  <span className="block mb-1">
                   <FontAwesomeIcon icon={faPhone}/> Teléfono: {o.client.phone}
-                  </p>
-                  <p className="mb-1">
+                  </span>
+                  <span className="block mb-1">
                     <FontAwesomeIcon icon={faEuroSign} className="mr-1" /> Valor: {o.value}
-                  </p>
-                  <p className="flex items-center">
+                  </span>
+                  <span className="flex items-center">
                     <FontAwesomeIcon icon={statusIcons[o.status]} className="mr-1" /> Estado:
                     <span
                       className={
@@ -160,7 +166,7 @@ const Opportunities: React.FC = () => {
                         <option value="Lost">Perdida</option>
                       </select>
                     </div>
-                  </p>
+                  </span>
                 </div>
                 {/* La sección de tareas sigue eliminada */}
               </div>

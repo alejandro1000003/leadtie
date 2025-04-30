@@ -1,6 +1,6 @@
 # Crear el contenido para el archivo .txt
 # Obtener oportunidades (por defecto 15)
-GET http://127.0.0.1:8000/api/opportunities
+# GET http://127.0.0.1:8000/api/opportunities
 # Authorization: Bearer {token}
 
 # Obtener oportunidad por ID
@@ -66,9 +66,9 @@ GET http://127.0.0.1:8000/api/opportunities
 
 # Actualizar parcialmente oportunidad (PATCH)
 # PATCH http://127.0.0.1:8000/api/opportunities/{id}
-# Authorization: Bearer {token}
+# # Authorization: Bearer {token}
 # Content-Type: application/json
-# 
+
 # {
 #     "status": "Won"
 # }

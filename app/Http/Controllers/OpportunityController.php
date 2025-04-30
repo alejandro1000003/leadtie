@@ -83,6 +83,38 @@ class OpportunityController extends Controller
 
         return response()->json(['message' => 'Opportunity updated']);
     }
+    
+    public function updatePartial(Request $request, $id)
+    {
+        $opportunity = Opportunity::find($id);
+
+        if (!$opportunity) {
+            return response()->json(['message' => 'Opportunity not found'], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'sometimes|required|string|max:255',
+            'value' => 'sometimes|required|numeric',
+            'status' => 'sometimes|required|in:Open,In Progress,Won,Lost',
+            'client_id' => 'sometimes|required|exists:clients,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ], 400);
+        }
+
+        $opportunity->fill($request->only('title', 'value', 'status', 'client_id'));
+        $opportunity->save();
+
+        return response()->json([
+            'message' => 'Opportunity updated successfully',
+            'status' => 200
+        ], 200);
+    }
 
     public function destroy($id)
     {
