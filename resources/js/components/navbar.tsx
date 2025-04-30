@@ -47,10 +47,10 @@ export default function Navbar() {
     </nav>
       
     {isModalOpen && (
-      <div className="absolute bottom-4 left-18 bg-white p-4 shadow-md border rounded-lg mr-5">
+      <div className="fixed z-50 top-11 right-2 bg-white p-4 shadow-md border rounded-lg ml-5 md:bottom-4 md:left-8 md:right-auto md:top-auto">
         <div className="text-black">
-        <span className="font-bold">Información del usuario</span> {/* Texto en negrita */}
-        <UserData />
+          <span className="font-bold">Información del usuario</span> {/* Texto en negrita */}
+          <UserData />
         </div>
       </div>
     )}
