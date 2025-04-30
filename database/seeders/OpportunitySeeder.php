@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Opportunity;  // Importa el modelo Opportunity
-use App\Models\Task;  // Importa el modelo Task
+use App\Models\Opportunity;
 use Faker\Factory as Faker;
 
 class OpportunitySeeder extends Seeder
@@ -14,13 +13,11 @@ class OpportunitySeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();  // Instancia de Faker
+        $faker = Faker::create();
 
-        // Crear 10 oportunidades
         foreach (range(1, 10) as $index) {
-            // Crear una oportunidad
             $opportunity = Opportunity::create([
-                'title' => $faker->sentence,  // Título aleatorio
+                'title' => $faker->sentence,
                 'client_id' => rand(1, 50),
                 'value' => $faker->randomFloat(2, 1000, 10000),  // Valor aleatorio entre 1000 y 10000
                 'status' => $faker->randomElement(['Open', 'In Progress', 'Won', 'Lost']),  // Estado aleatorio

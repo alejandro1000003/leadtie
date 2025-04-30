@@ -11,9 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Purga la tabla antes de crearla
+        if (Schema::hasTable('tasks')) {
+            DB::table('tasks')->truncate();
+        }     
+
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title');
+            $table->text('description');
+            $table->boolean('completed')->default(false);
+            $table->unsignedBigInteger('opportunity_id'); // Clave foránea
+            $table->timestamps(); // Includes 'created_at' and 'updated_at'
+
+            $table->foreign('opportunity_id')->references('id')->on('opportunities')->onDelete('cascade');
         });
     }
 

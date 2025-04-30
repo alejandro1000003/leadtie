@@ -11,7 +11,7 @@ interface Task {
   description: string;
   completed: boolean;
   opportunity: string;
-  created: string; // New property
+  created: string;
 }
 
 export default function TaskManager() {

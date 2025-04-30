@@ -10,8 +10,6 @@ use App\Http\Middleware\IsAdmin;
 
 // Rutas de la aplicación con middleware
 
-Route::get('/opportunities', [OpportunityController::class, 'index'])->name('opportunities.index');
-Route::get('/opportunities/{id}', [OpportunityController::class, 'index'])->name('opportunities.show');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('throttle:10,1')->post('/login', [AuthController::class, 'login']);
@@ -28,6 +26,8 @@ Route::middleware([IsUserAuth::class])->group(function () {
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
     
+    Route::get('/opportunities', [OpportunityController::class, 'index'])->name('opportunities.index');
+    Route::get('/opportunities/{id}', [OpportunityController::class, 'index'])->name('opportunities.show');
 
     Route::middleware([IsAdmin::class])->group(function () {
             Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');

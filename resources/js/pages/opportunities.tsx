@@ -8,9 +8,23 @@ import {
   faCheckCircle,
   faClock,
   faTimesCircle,
-  faPencilAlt
+  faPencilAlt,
+  faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import { getOpportunities } from '../services/opportunities-api-service'; // Importamos el servicio
+
+type Client = {
+  id: number;
+  first_name: string;
+  last_name: string | null;
+  email: string;
+  phone: string | null;
+  address: string | null;
+  company_name: string | null;
+  created_at: string;
+  updated_at: string;
+  last_page: number;
+}
 
 type Opportunity = {
   id: number;
@@ -18,8 +32,10 @@ type Opportunity = {
   client_id: string;
   value: number;
   status: 'Open' | 'In Progress' | 'Won' | 'Lost';
+  client: Client;
   // tasks?: Task[]; // Si en algún momento vuelves a necesitar las tareas, puedes dejar esto opcional
 }
+
 
 const Opportunities: React.FC = () => {
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
@@ -32,14 +48,26 @@ const Opportunities: React.FC = () => {
       setError(null);
       try {
         const response = await getOpportunities();
-        // Asumimos que la respuesta tiene una estructura como { data: [...] }
+        console.log("Fetched opportunities:", response.data);
         setOpportunities(response.data.map((item: any) => ({
           id: item.id,
           title: item.title,
           client_id: item.client_id?.toString() || '', // Aseguramos que client_id sea string
           value: item.value,
           status: item.status,
+          client: {
+            id: item.client.id,
+            first_name: item.client.first_name,
+            last_name: item.client.last_name,
+            email: item.client.email,
+            phone: item.client.phone,
+            address: item.client.address,
+            company_name: item.client.company_name,
+            created_at: item.client.created_at,
+            updated_at: item.client.updated_at,
+          },
         })));
+
       } catch (err: any) {
         console.error("Error fetching opportunities:", err);
         setError("Failed to load opportunities.");
@@ -95,7 +123,10 @@ const Opportunities: React.FC = () => {
                 <h3 className="text-lg leading-6 font-medium text-gray-900">{o.title}</h3>
                 <div className="mt-2 text-sm text-gray-500">
                   <p className="mb-1">
-                    <FontAwesomeIcon icon={faUser} className="mr-1" /> Cliente: {o.client_id}
+                    <FontAwesomeIcon icon={faUser} className="mr-1" /> Cliente:  <Link href={`/clients?email=${encodeURI(o.client.email)}`} className="text-blue-800">{o.client.first_name} {o.client.last_name}</Link> 
+                  </p>
+                  <p className="mb-1">
+                  <FontAwesomeIcon icon={faPhone}/> Teléfono: {o.client.phone}
                   </p>
                   <p className="mb-1">
                     <FontAwesomeIcon icon={faEuroSign} className="mr-1" /> Valor: {o.value}
@@ -118,7 +149,7 @@ const Opportunities: React.FC = () => {
                       {o.status}
                     </span>
                     <div className="relative ml-2">
-                      <FontAwesomeIcon icon={faPencilAlt} className="cursor-pointer" />
+                      <FontAwesomeIcon icon={faPencilAlt} className="cursor-pointer text-blue-600" />
                       <select
                         value={o.status}
                         onChange={(e) => handleStatusChange(e, o.id)}
