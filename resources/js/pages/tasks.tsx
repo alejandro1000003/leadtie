@@ -3,7 +3,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Link } from "@inertiajs/react";
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getTasks, Task as TaskType } from '../services/tasks-api-service'; // Importa tu servicio y la definición de Task
 
 interface Task {
   id: number;
@@ -15,32 +16,50 @@ interface Task {
 }
 
 export default function TaskManager() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: "Llamar a cliente",
-      description: "Confirmar detalles de la propuesta",
-      completed: false,
-      opportunity: "Oportunidad 1",
-      created: "2023-10-01", // Example date
-    },
-    {
-      id: 2,
-      title: "Enviar propuesta",
-      description: "Enviar propuesta con condiciones acordadas",
-      completed: true,
-      opportunity: "Oportunidad 2",
-      created: "2023-09-28", // Example date
-    },
-  ]);
+  const [tasks, setTasks] = useState<Task[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await getTasks();
+        // Mapeamos la respuesta de tu servicio a la estructura que usa TaskManager
+        const mappedTasks: Task[] = response.data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          completed: item.completed === 1, // Convertimos el 0/1 a booleano
+          opportunity: item.opportunity.title, // Asumiendo que solo quieres mostrar el título de la oportunidad
+          created: item.created_at,
+        }));
+        setTasks(mappedTasks);
+      } catch (err: any) {
+        setError('Error al cargar las tareas');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, []);
 
   const toggleComplete = (id: number) => {
     setTasks(prevTasks =>
-      prevTasks.map(task =>
+      prevTasks ? prevTasks.map(task =>
         task.id === id ? { ...task, completed: !task.completed } : task
-      )
+      ) : []
     );
   };
+
+  if (loading) {
+    return <div>Cargando tareas...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
@@ -52,7 +71,7 @@ export default function TaskManager() {
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Gestión de Tareas del CRM</h1>
 
         <div className="space-y-4">
-          {tasks.map((task) => (
+          {tasks && tasks.map((task) => (
             <Card
               key={task.id}
               onClick={() => toggleComplete(task.id)}
@@ -74,16 +93,16 @@ export default function TaskManager() {
                   >
                     {task.title}
                   </div>
-                  <p className={`mt-1 text-sm text-gray-500 ${task.completed ? "line-through" : ""}`}>
+                  <span className={`mt-1 text-sm text-gray-500 ${task.completed ? "line-through" : ""}`}>
                     {task.description}
-                  </p>
+                  </span>
                   <div className="mt-2 text-sm text-gray-500">
-                    <p>
+                    <span className="block">
                       <strong>Oportunidad:</strong> {task.opportunity}
-                    </p>
-                    <p>
-                      <strong>Creado:</strong> {task.created}
-                    </p>
+                    </span>
+                    <span className="block">
+                      <strong>Creado:</strong> {new Date(task.created).toLocaleDateString()}
+                    </span>
                   </div>
                 </div>
                 <div className="ml-2">

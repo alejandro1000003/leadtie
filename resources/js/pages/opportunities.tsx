@@ -48,7 +48,6 @@ const Opportunities: React.FC = () => {
       setError(null);
       try {
         const response = await getOpportunities();
-        console.log("Fetched opportunities:", response.data);
         setOpportunities(response.data.map((item: any) => ({
           id: item.id,
           title: item.title,

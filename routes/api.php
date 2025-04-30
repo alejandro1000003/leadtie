@@ -4,11 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OpportunityController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\IsUserAuth;
 use App\Http\Middleware\IsAdmin;
 
 // Rutas de la aplicación con middleware
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('/tasks/{id}', [TaskController::class, 'index'])->name('tasks.show');
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -28,6 +31,7 @@ Route::middleware([IsUserAuth::class])->group(function () {
     
     Route::get('/opportunities', [OpportunityController::class, 'index'])->name('opportunities.index');
     Route::get('/opportunities/{id}', [OpportunityController::class, 'index'])->name('opportunities.show');
+    
 
     Route::middleware([IsAdmin::class])->group(function () {
             Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');

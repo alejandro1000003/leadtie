@@ -69,7 +69,7 @@ const ClientsList: React.FC = () => {
             <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard</Link>
             
             {/* Filtros */}
-            <nav className="bg-gray-800 mb-5 flex items-center justify-between space-x-2 border px-2 py-2  text-white font-bold mt-4 overflow-scroll max-h-96 transition-all duration-500 ease-in-out">
+            <nav className="bg-gray-800 mb-5 flex items-center justify-between space-x-2 p-2 text-white font-bold mt-4 overflow-x-scroll max-h-96 transition-all rounded-2xl duration-500 ease-in-out">
                 <form
                     className="filters flex items-center space-x-2 m-auto"
                     onSubmit={(e) => {
