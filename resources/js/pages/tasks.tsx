@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
-import { getTasks, Task as TaskType } from '../services/tasks-api-service'; // Importa tu servicio y la definición de Task
+import { getTasks, updatePartialTask } from '../services/tasks-api-service'; // Importa tu servicio y la definición de Task
 
 interface Task {
   id: number;
@@ -45,12 +45,22 @@ export default function TaskManager() {
     fetchTasks();
   }, []);
 
-  const toggleComplete = (id: number) => {
-    setTasks(prevTasks =>
-      prevTasks ? prevTasks.map(task =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      ) : []
-    );
+  const toggleComplete = async (id: number) => {
+    const updatedTask = tasks?.find(task => task.id === id);
+    if (!updatedTask) return;
+
+    const updatedCompletedStatus = !updatedTask.completed;
+
+    try {
+      await updatePartialTask(id, { completed: updatedCompletedStatus });
+      setTasks(prevTasks =>
+        prevTasks ? prevTasks.map(task =>
+          task.id === id ? { ...task, completed: updatedCompletedStatus } : task
+        ) : []
+      );
+    } catch (error) {
+      console.error('Error al actualizar la tarea:', error);
+    }
   };
 
   if (loading) {

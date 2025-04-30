@@ -76,13 +76,13 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="text-xl font-semibold mb-4">Ventas Mensuales</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="flex justify-center">
+            <ResponsiveContainer width="90%" height={300}>
               <BarChart data={sales_chart}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="ventas" fill="#8884d8" radius={[4, 4, 0, 0]} />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Bar dataKey="ventas" fill="#8884d8" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>

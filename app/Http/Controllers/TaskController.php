@@ -84,6 +84,39 @@ class TaskController extends Controller
         return response()->json(['message' => 'Task updated']);
     }
 
+        
+    public function updatePartial(Request $request, $id)
+    {
+        $task = Task::find($id);
+
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'sometimes|nullable|string',
+            'completed' => 'sometimes|required|boolean',
+            'opportunity_id' => 'sometimes|required|exists:opportunities,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ], 400);
+        }
+
+        $task->fill($request->only('title', 'description', 'completed', 'opportunity_id'));
+        $task->save();
+
+        return response()->json([
+            'message' => 'Task updated successfully',
+            'status' => 200
+        ], 200);
+    }
+
     public function destroy($id)
     {
         $task = Task::find($id);

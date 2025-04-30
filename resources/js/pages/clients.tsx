@@ -4,7 +4,7 @@ import apiService, { Client } from '../services/client-api-service';
 import PaginationComponent from '../components/pagination';
 import ErrorPage from './error-page';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const formatearFecha = (f: string) => {
     const d = new Date(f);
@@ -17,6 +17,7 @@ const ClientsList: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
+    const [showFilters, setShowFilters] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchClients = async () => {
@@ -67,23 +68,31 @@ const ClientsList: React.FC = () => {
             {loading && <p className="text-gray-600">Cargando clientes...</p>}
 
             <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard</Link>
-            
             {/* Filtros */}
-            <nav className="bg-gray-800 mb-5 flex items-center justify-between space-x-2 p-2 text-white font-bold mt-4 overflow-x-scroll max-h-96 transition-all rounded-2xl duration-500 ease-in-out">
+            <div className="mb-5 fixed top-3 right-6">
+            <button
+                className="bg-gray-800 text-white px-2 py-2 rounded font-bold transition flex items-center"
+                onClick={() => setShowFilters((prev) => !prev)}
+            >
+                
+                {showFilters ? <FontAwesomeIcon icon={faXmark} /> : <FontAwesomeIcon icon={faFilter} />}
+            </button>
+            {showFilters && (
+                <nav className="bg-gray-800 mt-4 flex flex-col items-start space-y-2 text-white font-bold max-h-96 transition-all rounded-2xl w-max p-5 duration-500 ease-in-out fixed top-14 right-6">
                 <form
-                    className="filters flex items-center space-x-2 m-auto"
+                    className="filters flex flex-col items-start space-y-2 m-auto"
                     onSubmit={(e) => {
-                        e.preventDefault();
-                        const formData = new FormData(e.currentTarget);
-                        const queryParams = new URLSearchParams();
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const queryParams = new URLSearchParams();
 
-                        formData.forEach((value, key) => {
-                            if (value) {
-                                queryParams.set(key, value.toString());
-                            }
-                        });
+                    formData.forEach((value, key) => {
+                        if (value) {
+                        queryParams.set(key, value.toString());
+                        }
+                    });
 
-                        window.location.href = `${window.location.pathname}?${queryParams.toString()}`;
+                    window.location.href = `${window.location.pathname}?${queryParams.toString()}`;
                     }}
                 >
                     <input type="number" name="per_page" placeholder="nº de registros" className="border px-2 py-1 text-sm rounded" min="1" />
@@ -92,10 +101,12 @@ const ClientsList: React.FC = () => {
                     <input type="email" name="email" placeholder="Correo" className="border px-2 py-1 text-sm rounded" />
                     <input type="text" name="address" placeholder="Dirección" className="border px-2 py-1 text-sm rounded" />
                     <input type="text" name="company_name" placeholder="Empresa" className="border px-2 py-1 text-sm rounded" />
-                    <button type="submit" className="border px-3 py-1 rounded">⌕</button>
-                    <button type="button" className="border px-3 py-1 rounded" onClick={() => { window.location.href = window.location.pathname; }}>↻</button>
+                    <button type="submit" className="border px-3 py-1 rounded w-[100%]">⌕</button>
+                    <button type="button" className="border px-3 py-1 rounded w-[100%]" onClick={() => { window.location.href = window.location.pathname; }}>↻</button>
                 </form>
-            </nav>
+                </nav>
+            )}
+            </div>
 
 
             

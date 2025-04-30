@@ -11,6 +11,7 @@ use App\Http\Middleware\IsAdmin;
 
 // Rutas de la aplicación con middleware
 Route::patch('/opportunities/{id}', [OpportunityController::class, 'updatePartial'])->name('opportunities.updatePartial');
+Route::patch('/tasks/{id}', [TaskController::class, 'updatePartial'])->name('tasks.updatePartial');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('throttle:10,1')->post('/login', [AuthController::class, 'login']);

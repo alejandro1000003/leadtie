@@ -4,6 +4,6 @@ Accept: application/json
 
 {
     "name": "Garbanzo",
-    "email": "garbanzo@gmail.com",
+    "email": "alex@gmail.com",
     "password": "1234567891"
 }
