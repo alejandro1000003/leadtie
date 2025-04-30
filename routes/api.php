@@ -25,14 +25,14 @@ Route::middleware([IsUserAuth::class])->group(function () {
         Route::post('/logout', 'logout')->name('logout');
     });
     
-    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
-    Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');  
+    Route::get('/clients/total', [ClientController::class, 'getTotalClients'])->name('clients.total');
     
     Route::get('/opportunities', [OpportunityController::class, 'index'])->name('opportunities.index');
-    Route::get('/opportunities/{id}', [OpportunityController::class, 'index'])->name('opportunities.show');
-    
+        
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
-    Route::get('/tasks/{id}', [TaskController::class, 'index'])->name('tasks.show');
+    Route::get('/tasks/total', [TaskController::class, 'getTotalTasks'])->name('tasks.total');
+    
     
     Route::middleware([IsAdmin::class])->group(function () {
         Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');

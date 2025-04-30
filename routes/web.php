@@ -26,3 +26,7 @@ Route::get('/opportunities', function () {
 Route::get('/tasks', function () {
     return Inertia::render('tasks');
 });
+
+Route::get('/getTotalnumber', function () {
+    return Inertia::render('getTotalnumber');
+});

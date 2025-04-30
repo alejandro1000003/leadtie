@@ -63,6 +63,15 @@ class ClientController extends Controller
     }
     
     /**
+     * Get the total number of clients. (GET)
+     */
+    public function getTotalClients()
+    {
+        $totalClients = Client::count();
+        return response()->json(['total_clients' => $totalClients], 200);
+    }
+
+    /**
      * Store a newly created resource in storage. (POST)
      */
     public function store(Request $request)

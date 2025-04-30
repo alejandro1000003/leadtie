@@ -66,6 +66,16 @@ export const getClientById = async (id: number): Promise<Client> => {
   }
 };
 
+// Función para obtener el número total de clientes (GET)
+export const getTotalClients = async (): Promise<number> => {
+  try {
+    const response = await api.get<{ total_clients: number }>('/clients/total');
+    return handleResponse(response).total_clients;
+  } catch (error) {
+    return handleError(error as AxiosError);
+  }
+};
+
 // Función para crear un cliente (POST)
 export const createClient = async (clientData: Omit<Client, 'id'>): Promise<any> => {
   try {
@@ -97,7 +107,7 @@ export const updatePartialClient = async (id: number, clientData: Partial<Client
 };
 
 // Función para eliminar un cliente (DELETE)
-export const deleteClient = async (id: number): Promise<any> => {
+export const deleteClient = async (id: number): Promise<number> => {
   try {
     const response = await api.delete(`/clients/${id}`);
     return handleResponse(response);
@@ -106,6 +116,7 @@ export const deleteClient = async (id: number): Promise<any> => {
   }
 };
 
+
 export default {
   getClients,
   getClientById,
@@ -113,4 +124,5 @@ export default {
   updateClient,
   updatePartialClient,
   deleteClient,
+  getTotalClients,
 };

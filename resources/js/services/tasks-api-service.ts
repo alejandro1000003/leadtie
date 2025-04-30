@@ -110,6 +110,16 @@ export const deleteTask = async (id: number): Promise<any> => {
     }
 };
 
+// Función para obtener el total de tareas (GET)
+export const getTotalTasks = async (): Promise<number> => {
+    try {
+        const response = await api.get<{ total_tasks: number }>('/tasks/total');
+        return handleResponse(response).total_tasks;
+    } catch (error) {
+        return handleError(error as AxiosError);
+    }
+};
+
 export default {
     getTasks,
     getTaskById,
@@ -117,4 +127,5 @@ export default {
     updateTask,
     updatePartialTask,
     deleteTask,
+    getTotalTasks,
 };

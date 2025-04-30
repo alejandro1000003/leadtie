@@ -46,6 +46,15 @@ class TaskController extends Controller
         return response()->json($task);
     }
 
+    /**
+     * Get the total number of tasks. (GET)
+     */
+    public function getTotalTasks()
+    {
+        $totalTasks = Task::where('completed', false)->count();
+        return response()->json(['total_tasks' => $totalTasks], 200);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

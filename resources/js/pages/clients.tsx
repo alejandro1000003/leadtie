@@ -67,7 +67,7 @@ const ClientsList: React.FC = () => {
         <div className="p-6 mx-auto h-[100vh] bg-gray-100">
             {loading && <p className="text-gray-600">Cargando clientes...</p>}
 
-            <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Volver a Dashboard</Link>
+            <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} /> Volver a Dashboard</Link>
             {/* Filtros */}
             <div className="mb-5 fixed top-3 right-6">
             <button
@@ -78,7 +78,7 @@ const ClientsList: React.FC = () => {
                 {showFilters ? <FontAwesomeIcon icon={faXmark} /> : <FontAwesomeIcon icon={faFilter} />}
             </button>
             {showFilters && (
-                <nav className="bg-gray-800 mt-4 flex flex-col items-start space-y-2 text-white font-bold max-h-96 transition-all rounded-2xl w-max p-5 duration-500 ease-in-out fixed top-14 right-6">
+                <nav className="bg-gray-800 mt-4 flex flex-col items-start space-y-2 text-white font-bold max-h-96 transition-all rounded-2xl w-max p-5 duration-500 ease-in-out fixed top-10 right-6">
                 <form
                     className="filters flex flex-col items-start space-y-2 m-auto"
                     onSubmit={(e) => {
@@ -112,7 +112,7 @@ const ClientsList: React.FC = () => {
             
 
             {/* Tabla */}
-            <div className="overflow-x-auto border border-gray-200 bg-white">
+            <div className="overflow-x-auto border border-gray-200 bg-white mt-3">
                 <table className="w-full table-auto text-sm      ">
                     <thead className="bg-[#8884d8] text-white border-b ">
                         <tr>
