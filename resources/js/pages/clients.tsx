@@ -112,30 +112,29 @@ const ClientsList: React.FC = () => {
             
 
             {/* Tabla */}
-            <div className="overflow-x-auto border border-gray-200 bg-white mt-3">
-                <table className="w-full table-auto text-sm      ">
-                    <thead className="bg-[#8884d8] text-white border-b ">
+            <div className=" overflow-x-auto border border-gray-200 bg-white mt-3 ">
+                <table className="w-full table-auto text-sm">
+                    <thead className="bg-[#8884d8] text-white border-b">
                         <tr>
-                            {['ID', 'Nombre', 'Apellido', 'Email', 'Teléfono', 'Dirección', 'Compañía', 'Creado', 'Actualizado', 'Acciones'].map((col) => (
-                                <th key={col} className="px-3 py-2 text-left font-semibold">
-                                    {col}
-                                </th>
-                            ))}
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Nombre</th>
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Email</th>
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Teléfono</th>
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left hidden sm:table-cell">Dirección</th>
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Compañía</th>
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left hidden sm:table-cell">Creado</th>
+                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {clients.map((client, index) => (
-                            <tr key={client.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                                <td className="px-3 py-2">{client.id}</td>
-                                <td className="px-3 py-2">{client.first_name}</td>
-                                <td className="px-3 py-2">{client.last_name}</td>
-                                <td className="px-3 py-2">{client.email}</td>
-                                <td className="px-3 py-2">{client.phone}</td>
-                                <td className="px-3 py-2">{client.address}</td>
-                                <td className="px-3 py-2">{client.company_name}</td>
-                                <td className="px-3 py-2 text-xs text-gray-500 collapsible">{formatearFecha(client.created_at)}</td>
-                                <td className="px-3 py-2 text-xs text-gray-500 collapsible">{formatearFecha(client.updated_at)}</td>
-                                <td className="px-3 py-2 space-x-2">
+                            <tr key={client.id} className={index % 2 === 0 ? 'bg-white font-bold' : 'bg-gray-50'}>
+                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.first_name}</td>
+                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.email}</td>
+                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.phone}</td>
+                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3 hidden sm:table-cell">{client.address}</td>
+                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.company_name}</td>
+                                <td className="px-0 py-0 text-[10px] sm:text-xs text-gray-500 collapsible hidden sm:table-cell">{formatearFecha(client.created_at)}</td>
+                                <td className="px-0 py-0 space-x-2 text-xs sm:text-sm">
                                     <button className="text-blue-600 hover:scale-110 transition">📝</button>
                                     <button className="text-red-600 hover:scale-110 transition">🗑️</button>
                                 </td>

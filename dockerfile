@@ -1,6 +1,6 @@
 # build contenedor -> sudo docker build -t demo/laravel:0.1 .
 # start contenedor -> sudo docker run -p 8000:80 demo/laravel:0.1
-
+# exportar al pen -> sudo docker export 36c99b5cc1ff -o "/media/alejandro/UBUNTU 24_0/laravel-container.tar"
 FROM php:8.2-apache
 
 # Install dependencies
