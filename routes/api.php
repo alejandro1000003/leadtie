@@ -27,7 +27,10 @@ Route::middleware([IsUserAuth::class])->group(function () {
     
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');  
     Route::get('/clients/total', [ClientController::class, 'getTotalClients'])->name('clients.total');
-    
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::patch('/clients/{id}', [ClientController::class, 'updatePartial'])->name('clients.updatePartial');
+
     Route::get('/opportunities', [OpportunityController::class, 'index'])->name('opportunities.index');
         
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
@@ -35,10 +38,7 @@ Route::middleware([IsUserAuth::class])->group(function () {
     
     
     Route::middleware([IsAdmin::class])->group(function () {
-        Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
         Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
-        Route::patch('/clients/{id}', [ClientController::class, 'updatePartial'])->name('clients.updatePartial');
-        Route::middleware('throttle:10,1')->delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
     });
 });
 

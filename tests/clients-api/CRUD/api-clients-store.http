@@ -10,5 +10,4 @@ Authorization: Bearer (token)
     "phone": "987-654-3210",
     "address": "456 Elm St",
     "company_name": "Smith Co.",
-    "pedorro": "456 Elm St"
 }

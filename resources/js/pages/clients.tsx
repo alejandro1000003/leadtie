@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from '@inertiajs/react';
-import apiService, { Client } from '../services/client-api-service';
-import PaginationComponent from '../components/pagination';
-import ErrorPage from './error-page';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Link } from '@inertiajs/react';
+import React, { useEffect, useState } from 'react';
+import { ClientFilter } from '../components/client-filter';
+import PaginationComponent from '../components/pagination';
+import apiService, { Client } from '../services/client-api-service';
+import ErrorPage from './error-page';
+import {openPatchClientModal} from '../components/patch-client'; 
 
 const formatearFecha = (f: string) => {
     const d = new Date(f);
@@ -17,7 +19,6 @@ const ClientsList: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
-    const [showFilters, setShowFilters] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchClients = async () => {
@@ -39,7 +40,7 @@ const ClientsList: React.FC = () => {
                     last_name,
                     email,
                     address,
-                    company_name
+                    company_name,
                 });
 
                 if (!data) {
@@ -50,7 +51,6 @@ const ClientsList: React.FC = () => {
                 setClients(data.data);
                 setCurrentPage(data.current_page);
                 setTotalPages(data.last_page);
-
             } catch (err: any) {
                 setError(err.message || 'Error fetching clients');
             } finally {
@@ -64,88 +64,73 @@ const ClientsList: React.FC = () => {
     if (error) return <ErrorPage />;
 
     return (
-        <div className="p-6 mx-auto h-[100vh] bg-gray-100">
+        <div className="mx-auto h-[100vh] bg-gray-100 p-6">
             {loading && <p className="text-gray-600">Cargando clientes...</p>}
 
-            <Link href="/dashboard" className="text-blue-600 hover:underline font-semibold"><FontAwesomeIcon icon={faArrowLeft} /> Volver a Dashboard</Link>
+            <Link href="/dashboard" className="font-semibold text-blue-600 hover:underline">
+                <FontAwesomeIcon icon={faArrowLeft} /> Volver a Dashboard
+            </Link>
+
             {/* Filtros */}
-            <div className="mb-5 fixed top-3 right-6">
-            <button
-                className="bg-gray-800 text-white px-2 py-2 rounded font-bold transition flex items-center"
-                onClick={() => setShowFilters((prev) => !prev)}
-            >
-                
-                {showFilters ? <FontAwesomeIcon icon={faXmark} /> : <FontAwesomeIcon icon={faFilter} />}
-            </button>
-            {showFilters && (
-                <nav className="bg-gray-800 mt-4 flex flex-col items-start space-y-2 text-white font-bold max-h-96 transition-all rounded-2xl w-max p-5 duration-500 ease-in-out fixed top-10 right-6">
-                <form
-                    className="filters flex flex-col items-start space-y-2 m-auto"
-                    onSubmit={(e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    const queryParams = new URLSearchParams();
-
-                    formData.forEach((value, key) => {
-                        if (value) {
-                        queryParams.set(key, value.toString());
-                        }
-                    });
-
-                    window.location.href = `${window.location.pathname}?${queryParams.toString()}`;
-                    }}
-                >
-                    <input type="number" name="per_page" placeholder="nº de registros" className="border px-2 py-1 text-sm rounded" min="1" />
-                    <input type="text" name="first_name" placeholder="Nombre" className="border px-2 py-1 text-sm rounded" />
-                    <input type="text" name="last_name" placeholder="Apellido" className="border px-2 py-1 text-sm rounded" />
-                    <input type="email" name="email" placeholder="Correo" className="border px-2 py-1 text-sm rounded" />
-                    <input type="text" name="address" placeholder="Dirección" className="border px-2 py-1 text-sm rounded" />
-                    <input type="text" name="company_name" placeholder="Empresa" className="border px-2 py-1 text-sm rounded" />
-                    <button type="submit" className="border px-3 py-1 rounded w-[100%]">⌕</button>
-                    <button type="button" className="border px-3 py-1 rounded w-[100%]" onClick={() => { window.location.href = window.location.pathname; }}>↻</button>
-                </form>
-                </nav>
-            )}
-            </div>
-
-
-            
+            <ClientFilter />
 
             {/* Tabla */}
-            <div className=" overflow-x-auto border border-gray-200 bg-white mt-3 ">
-                <table className="w-full table-auto text-sm">
-                    <thead className="bg-[#8884d8] text-white border-b">
+            <div className="mt-3 overflow-x-auto border border-gray-200 bg-white">
+                <table className="w-full table-auto">
+                    <thead className="border-b bg-[#8884d8] text-white">
                         <tr>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Nombre</th>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Email</th>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Teléfono</th>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left hidden sm:table-cell">Dirección</th>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Compañía</th>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left hidden sm:table-cell">Creado</th>
-                            <th className="px-0 py-0 text-[10px] sm:text-sm text-left">Acciones</th>
+                            <th className="px-0 py-0 text-left text-[10px] sm:text-sm sm:p-2">Nombre</th>
+                            <th className="px-0 py-0 text-left text-[10px] sm:text-sm sm:p-2">Email</th>
+                            <th className="px-0 py-0 text-left text-[10px] sm:text-sm sm:p-2">Teléfono</th>
+                            <th className="hidden px-0 py-0 text-left text-[10px] sm:table-cell sm:text-sm sm:p-2">Dirección</th>
+                            <th className="px-0 py-0 text-left text-[10px] sm:text-sm sm:p-2">Compañía</th>
+                            <th className="hidden px-0 py-0 text-left text-[10px] sm:table-cell sm:text-sm sm:p-2">Creado</th>
+                            <th className="px-0 py-0 text-left text-[10px] sm:text-sm sm:p-2">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {clients.map((client, index) => (
-                            <tr key={client.id} className={index % 2 === 0 ? 'bg-white font-bold' : 'bg-gray-50'}>
-                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.first_name}</td>
-                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.email}</td>
-                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.phone}</td>
-                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3 hidden sm:table-cell">{client.address}</td>
-                                <td className="px-0 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-3">{client.company_name}</td>
-                                <td className="px-0 py-0 text-[10px] sm:text-xs text-gray-500 collapsible hidden sm:table-cell">{formatearFecha(client.created_at)}</td>
-                                <td className="px-0 py-0 space-x-2 text-xs sm:text-sm">
-                                    <button className="text-blue-600 hover:scale-110 transition">📝</button>
-                                    <button className="text-red-600 hover:scale-110 transition">🗑️</button>
+                            <tr key={client.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                <td className="px-0 py-0 text-[10px] sm:px-2 sm:py-3 sm:text-xs">{client.first_name}</td>
+                                <td className="px-0 py-0 text-[10px] sm:px-2 sm:py-3 sm:text-xs">{client.email}</td>
+                                <td className="px-0 py-0 text-[10px] sm:px-2 sm:py-3 sm:text-xs">{client.phone}</td>
+                                <td className="hidden px-0 py-0 text-[10px] sm:table-cell sm:px-2 sm:py-3 sm:text-xs">{client.address}</td>
+                                <td className="px-0 py-0 text-[10px] sm:px-2 sm:py-3 sm:text-xs">{client.company_name}</td>
+                                <td className="collapsible hidden px-0 py-0 text-[10px] text-gray-500 sm:table-cell sm:text-xs">
+                                    {formatearFecha(client.created_at)}
+                                </td>
+                                <td className="space-x-2 px-0 py-0 text-xs sm:text-sm">
+                                    <button
+                                        className="text-blue-600 transition hover:scale-110"
+                                        onClick={() => openPatchClientModal({
+                                            id: client.id,
+                                            first_name: client.first_name,
+                                            last_name: client.last_name || '',
+                                            email: client.email,
+                                            phone: client.phone || '',
+                                            address: client.address || '',
+                                            company_name: client.company_name || '',
+                                        })}
+                                    >
+                                        ✏️
+                                    </button>
+                                    <button
+                                        className="text-red-600 transition hover:scale-110"
+                                        onClick={async () => {
+                                            await apiService.deleteClient(client.id);
+                                            window.location.reload();
+                                        }}
+                                    >
+                                        🗑️
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-                        
+
             <PaginationComponent currentPage={currentPage} totalPages={totalPages} />
-           
         </div>
     );
 };

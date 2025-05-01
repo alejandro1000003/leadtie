@@ -77,7 +77,7 @@ export const getTotalClients = async (): Promise<number> => {
 };
 
 // Función para crear un cliente (POST)
-export const createClient = async (clientData: Omit<Client, 'id'>): Promise<any> => {
+export const createClient = async (clientData: any): Promise<any> => {
   try {
     const response = await api.post('/clients', clientData);
     return handleResponse(response);
@@ -87,9 +87,9 @@ export const createClient = async (clientData: Omit<Client, 'id'>): Promise<any>
 };
 
 // Función para actualizar un cliente completamente (PUT)
-export const updateClient = async (id: number, clientData: Client): Promise<any> => {
+export const updateClient = async (id: number, clientData: Partial<Client>): Promise<any> => {
   try {
-    const response = await api.put(`/clients/${id}`, clientData);
+    const response = await api.patch(`/clients/${id}`, clientData);
     return handleResponse(response);
   } catch (error) {
     return handleError(error as AxiosError);
@@ -107,12 +107,12 @@ export const updatePartialClient = async (id: number, clientData: Partial<Client
 };
 
 // Función para eliminar un cliente (DELETE)
-export const deleteClient = async (id: number): Promise<number> => {
+export const deleteClient = async (id: number): Promise<void> => {
   try {
-    const response = await api.delete(`/clients/${id}`);
-    return handleResponse(response);
+    const response = await api.delete<{ message: string }>(`/clients/${id}`);
+    handleResponse(response);
   } catch (error) {
-    return handleError(error as AxiosError);
+    handleError(error as AxiosError);
   }
 };
 
