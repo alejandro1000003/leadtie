@@ -8,17 +8,33 @@ export const ClientFilter: React.FC = () => {
     const [showAddClient, setShowAddClient] = useState<boolean>(false);
 
     return (
-        <div className="fixed top-6 right-6 mb-5 p-1">
-            <button className="ml-1 h-6 w-6 rounded bg-gray-800 font-bold text-white transition" onClick={() => setShowAddClient((prev) => !prev)}>
+        <div className="fixed top-15 right-5 mb-5 p-1">
+            <button
+                className="ml-1 h-6 w-6 rounded bg-gray-800 font-bold text-white transition"
+                onClick={() => {
+                    setShowAddClient((prev) => {
+                        if (!prev) setShowFilters(false);
+                        return !prev;
+                    });
+                }}
+            >
                 {showAddClient ? <FontAwesomeIcon icon={faXmark} /> : <FontAwesomeIcon icon={faPlus} />}
             </button>
 
-            <button className="ml-1 h-6 w-6 rounded bg-gray-800 font-bold text-white transition" onClick={() => setShowFilters((prev) => !prev)}>
+            <button
+                className="ml-1 h-6 w-6 rounded bg-gray-800 font-bold text-white transition"
+                onClick={() => {
+                    setShowFilters((prev) => {
+                        if (!prev) setShowAddClient(false);
+                        return !prev;
+                    });
+                }}
+            >
                 {showFilters ? <FontAwesomeIcon icon={faXmark} /> : <FontAwesomeIcon icon={faFilter} />}
             </button>
 
             {showFilters && (
-                <div className="fixed top-10 right-6 mt-4 flex max-h-96 w-max flex-col items-start space-y-2 rounded-2xl bg-gray-800 p-5 font-bold text-white transition-all duration-500 ease-in-out">
+                <div className="fixed top-20 right-6 mt-4 flex max-h-96 w-max flex-col items-start space-y-2 rounded-2xl bg-gray-800 p-5 font-bold text-white transition-all duration-500 ease-in-out">
                     <form
                         className="filters m-auto flex flex-col items-start space-y-2"
                         onSubmit={(e) => {
@@ -59,7 +75,7 @@ export const ClientFilter: React.FC = () => {
             )}
 
             {showAddClient && (
-                <div className="fixed top-10 right-6 mt-4 flex max-h-96 w-max flex-col items-start space-y-2 rounded-2xl bg-gray-800 p-5 font-bold text-white transition-all duration-500 ease-in-out">
+                <div className="fixed top-20 right-6 mt-4 flex max-h-96 w-max flex-col items-start space-y-2 rounded-2xl bg-gray-800 p-5 font-bold text-white transition-all duration-500 ease-in-out">
                     <form
                         className="add-client m-auto flex flex-col items-start space-y-2"
                         onSubmit={async (e) => {

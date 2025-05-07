@@ -9,7 +9,7 @@ import { useUserStore } from '@/stores/use-user-store';
 
 export default function Login() {
 
-    const { isLoading, login, setLoading } = useUserStore();
+    const { isLoading, login, logout, setLoading } = useUserStore();
 
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
@@ -20,6 +20,7 @@ export default function Login() {
         setLoading(true);
 
         try {
+            await logout();
             await login(emailInput, passwordInput);
             window.location.href = '/dashboard';
         } catch (error) {

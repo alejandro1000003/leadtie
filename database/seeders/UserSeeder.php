@@ -20,18 +20,9 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => Hash::make('1234'),  // Contraseña cifrada
+            'password' => Hash::make('1234567891'),  // Contraseña cifrada
             'role' => 'admin',
         ]);
 
-        // Crear 10 usuarios con datos aleatorios usando Faker
-        foreach (range(1, 10) as $index) {
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->unique()->safeEmail,
-                'password' => Hash::make('password'),  // Contraseña cifrada
-                'role' => 'user',
-            ]);
-        }
     }
 }

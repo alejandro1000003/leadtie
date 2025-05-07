@@ -71,11 +71,12 @@ const ClientsList: React.FC = () => {
                 <FontAwesomeIcon icon={faArrowLeft} /> Volver a Dashboard
             </Link>
 
-            {/* Filtros */}
+            {/* Filtros y Título */}
             <ClientFilter />
+            <h2 className="mt-3 text-2xl font-bold text-gray-900">Clientes</h2>
 
             {/* Tabla */}
-            <div className="mt-3 overflow-x-auto border border-gray-200 bg-white">
+            <div className="mt-3 overflow-x-auto border rounded border-gray-200 bg-white">
                 <table className="w-full table-auto">
                     <thead className="border-b bg-[#8884d8] text-white">
                         <tr>

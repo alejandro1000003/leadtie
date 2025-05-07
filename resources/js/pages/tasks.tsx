@@ -5,6 +5,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import { getTasks, updatePartialTask } from '../services/tasks-api-service'; // Importa tu servicio y la definición de Task
+import ErrorPage from "./error-page";
 
 interface Task {
   id: number;
@@ -68,7 +69,7 @@ export default function TaskManager() {
   }
 
   if (error) {
-    return <div>{error}</div>;
+      return <ErrorPage />;
   }
 
   return (

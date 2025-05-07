@@ -17,7 +17,9 @@ class ClientSeeder extends Seeder
         Client::truncate();
         $faker = Faker::create();
 
-        foreach (range(1, 100) as $index) {
+        $numberOfClients = $faker->numberBetween(50, 150); // Generate a random number of clients between 50 and 150
+
+        foreach (range(1, $numberOfClients) as $index) {
             Client::create([
             'id' => $index,
             'first_name' => $faker->firstName,

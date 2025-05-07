@@ -1,42 +1,37 @@
 import { Link } from '@inertiajs/react';
 
-export default function home() {
+export default function Home() {
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl font-bold">Bienvenido</h1>
-            <Link href="/login" className="mt-4 text-blue-500">Iniciar sesión</Link>
+        <div className="min-h-screen bg-gray-100 flex flex-col">
+            <header className="bg-white p-4 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">CRM</h2>
+                <Link href="/login" className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">
+                    Iniciar sesión
+                </Link>
+            </header>
+            <div className="bg-[#8884d8] flex-grow grid grid-cols-3 gap-4 p-8">
+                <div className="bg-white shadow-md rounded-md p-4 col-span-3 md:col-span-2 row-span-2 flex flex-col justify-center items-center">
+                    <svg className="w-16 h-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-2 5zm0-5l-2-5L9 15l11-4-2-5z"></path></svg>
+                </div>
+                <div className="bg-white shadow-md rounded-md p-4 grid grid-cols-2 gap-2">
+                    <div className="bg-gray-100 rounded-md flex items-center justify-center text-xs">*</div>
+                    <div className="bg-gray-100 rounded-md flex items-center justify-center text-xs">-</div>
+                    <div className="bg-gray-100 rounded-md flex items-center justify-center text-xs">*</div>
+                    <div className="bg-gray-100 rounded-md flex items-center justify-center text-xs">-</div>
+                </div>
+                <div className="bg-white shadow-md rounded-md p-4 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m-3 5h5c.008.11.015.22.015.33a10.928 10.928 0 00-.443 3.89 16 16 0 01-2.427-4.096A9 9 0 008 16.92a9 9 0 01-.643-2.553A10.922 10.922 0 007 11.333c0-.22-.007-.44-.015-.66"></path></svg>
+                </div>
+                <div className="bg-white shadow-md rounded-md p-4 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17v-2m3 4v-2m3-2v-2m3 4v-2m-6 1v-3m0 0v-3m-3 4v-2m3-4v-3"></path></svg>
+                </div>
+                <div className="bg-white shadow-md rounded-md p-4 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-1 2 1m-2-3l2-1-2 1m2-3l2-1-2 1m-2-3v2m2-6v2m-4-4v2M3 9l2-2 2 2m-2-3l2-2-2 2m2-3l2-2-2 2"></path></svg>
+                </div>
+                <div className="bg-white shadow-md rounded-md p-4 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8c0 1.1-.9 2-2 2h-3l-4 4z"></path></svg>
+                </div>
+            </div>
         </div>
     );
 }
-
-// function dashboard() {
-//     return (
-//         <div className="flex h-full flex-1 flex-col gap-6 rounded-xl p-6">
-//             {/* Grid con 3 tarjetas */}
-//             <div className="grid auto-rows-min gap-6 md:grid-cols-3">
-//                 {["Clientes", "Oportunidades", "Tareas"].map((title, index) => (
-//                     <div 
-//                         key={index} 
-//                         className="relative aspect-video overflow-hidden rounded-xl border border-gray-300 shadow-lg hover:scale-105 transition-transform duration-300"
-//                     >
-//                         <img 
-//                             src={`https://source.unsplash.com/400x300/?business,${index}`} 
-//                             alt={title} 
-//                             className="absolute inset-0 w-full h-full object-cover opacity-80"
-//                         />
-//                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-//                             <h2 className="text-white text-2xl font-bold">{title}</h2>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-
-//             {/* Sección principal con gradiente */}
-//             <div className="relative flex items-center justify-center min-h-[50vh] flex-1 rounded-xl border border-gray-300 shadow-xl bg-gradient-to-br from-blue-500 to-purple-600">
-//                 <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">
-//                     ¡Bienvenido al CRM!
-//                 </h1>
-//             </div>
-//         </div>
-//     );
-// }
