@@ -74,9 +74,9 @@ const ClientsList: React.FC = () => {
             {/* Filtros y Título */}
             <ClientFilter />
             <h2 className="mt-3 text-2xl font-bold text-gray-900">Clientes</h2>
-
+            <span className='text-red-600'>Solo los administradores pueden modificar o eliminar clientes</span>
             {/* Tabla */}
-            <div className="mt-3 overflow-x-auto border rounded border-gray-200 bg-white">
+            <div className="mt-3 overflow-x-auto border rounded-[6px] border-gray-200 bg-white">
                 <table className="w-full table-auto">
                     <thead className="border-b bg-[#8884d8] text-white">
                         <tr>

@@ -32,6 +32,11 @@ export default function Login() {
 
     return (
         <>
+            <span className="block text-sm text-gray-500">
+                Administrador: <strong>admin@example.com</strong> Password: <strong>1234567891</strong><br />
+                Usuario: <strong>user@example.com</strong> Password: <strong>1234567891</strong>
+            </span>
+
             <Head title="Login" />
             <div className="flex min-h-screen items-center justify-center bg-gray-100">
                 <h1 className='hidden md:font-bold md:mr-15 md:block'>Login</h1>

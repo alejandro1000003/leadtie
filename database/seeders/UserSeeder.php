@@ -16,12 +16,18 @@ class UserSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Crear un usuario admin con la contraseña cifrada
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('1234567891'),  // Contraseña cifrada
             'role' => 'admin',
+        ]);
+
+        User::create([
+            'name' => 'User',
+            'email' => 'user@example.com',
+            'password' => Hash::make('1234567891'),  // Contraseña cifrada
+            'role' => 'user',
         ]);
 
     }
