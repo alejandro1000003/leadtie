@@ -1,4 +1,4 @@
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft,faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react';
@@ -74,7 +74,10 @@ const ClientsList: React.FC = () => {
             {/* Filtros y Título */}
             <ClientFilter />
             <h2 className="mt-3 text-2xl font-bold text-gray-900">Clientes</h2>
-            <span className='text-red-600'>Solo los administradores pueden modificar o eliminar clientes</span>
+            <div className="mt-2 flex items-center text-red-600">
+                <FontAwesomeIcon icon={faTriangleExclamation} className="mr-2" />
+                <span className="font-semibold">Solo los administradores pueden modificar o eliminar clientes</span>
+            </div>
             {/* Tabla */}
             <div className="mt-3 overflow-x-auto border rounded-[6px] border-gray-200 bg-white">
                 <table className="w-full table-auto">

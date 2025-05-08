@@ -1,74 +1,126 @@
+## Al subir al host evitar
+- /resources/
+- /public/
+
 # Proyecto ERP en Laravel + React + SQLite
 
-## Descripción del Proyecto
+## Descripción del proyecto
 
-Este es un **CRM** desarrollado con **Laravel** para el backend, **React** para el frontend y **SQLite** como base de datos.
+Esta aplicación es un sistema de gestión de relaciones con clientes (CRM) diseñado para organizar y optimizar el seguimiento de **clientes**, **oportunidades de venta** y **tareas** dentro de un flujo de trabajo comercial. Permite gestionar la información de los clientes de manera estructurada, todo accesible a través de una interfaz clara y fácil de usar.
 
----
+### Características Principales:
+- **Gestión de Clientes**: Almacena y organiza la información de los clientes, incluyendo datos de contacto.
+- **Oportunidades de Venta**: Visualiza los estados y el potencial de cada oportunidad de venta, permitiendo priorizar esfuerzos comerciales.
+- **Gestión de Tareas**: Asegura que el equipo esté siempre al tanto de las actividades necesarias para avanzar en cada proyecto.
+
+Este CRM fue desarrollado con el objetivo de crear un proyecto de portfolio funcional y alineado con necesidades comerciales reales.
 
 ## Características
-
-- **Backend**: Laravel 11
-- **Frontend**: React
+- **Backend**: Laravel 12
+- **Frontend**: React, TailwindCSS
 - **Base de Datos**: SQLite
-- **Middleware**: Autenticación y Throttling
 - **Estrategia branching**: Github Flow
-- **Virtualización**: Docker definido
 
----
 ## Backend
 
-### Modelo Cliente
-
-En esta sección se describe el modelo de **Cliente**, que es una de las entidades principales en el sistema. Este modelo interactúa con la base de datos y define las relaciones con otros elementos del sistema (como oportunidades y tareas, si es necesario).
-
----
-#### Seeder definido
----
-### Controlador API
-
-El controlador asociado al modelo de **Cliente** se encarga de manejar las peticiones y respuestas relacionadas con la gestión de clientes. Se definen las operaciones necesarias, como la creación, lectura, actualización y eliminación (CRUD) de clientes.
-
-1. Validación de Datos de Entrada.
-2. Cifrado de Contraseñas con `bcrypt`.
-3. Uso de JWT para la Autenticación.
-4. Refresh Tokens (Tokens de Renovación).
-5. Almacenamiento Seguro del Refresh Token en Cookie HTTPOnly.
-6. Invalidez de Tokens y Logout.
-7. Comprobación de Autenticación y Autorización.
-8. Uso de Hash para Almacenar el Refresh Token.
-9. Validación y Gestión de Errores.
-10. Control de Expiración del Token de Acceso.
-
----
-
-### Rutas
-
-En esta sección se describen las rutas que permiten interactuar con el sistema. Estas rutas gestionan las peticiones a la API y están asociadas a los controladores correspondientes. Se mencionan las rutas que exponen las operaciones CRUD para los clientes y cualquier otra funcionalidad relevante.
-
----
-
-### Middleware Throttling Definido
-
-El middleware de **throttling** se utiliza para limitar la cantidad de solicitudes que un usuario puede realizar en un intervalo de tiempo determinado. Esto ayuda a proteger el sistema contra abusos y sobrecargas.
-
----
-
-### Middleware de Autenticación Definido
-
-Implementar **autenticación con JWT** en una API de Laravel 11 para un **CRM**, donde:  
-✅ Un usuario pueda **iniciar sesión** y obtener un token.  
-✅ Solo los **usuarios autenticados** puedan acceder a los clientes.  
-✅ Solo los **administradores** puedan gestionar clientes.
+### Base de datos
+- Modelos usuario, cliente, oportundiad, tarea
+- Migraciones usuario, cliente, oportundiad, tarea
+- Seeders usuario, cliente, oportundiad, tarea
+- Relaciones entre modelos;
+   - **Cliente** ➡️ tiene muchas ➡️ **Oportunidades**
+   - **Oportunidad** ⬅️ pertenece a ⬅️ **Cliente**
+   - **Oportunidad** ➡️ tiene muchas ➡️ **Tareas**
+   - **Tarea** ⬅️ pertenece a ⬅️ **Oportunidad**
+   - **Usuario** 🚫 tiene relación directa de negocio con Clientes, Oportunidades o Tareas (se usa para autenticación).
 
 
+### Controladores API
 
----
+🛡️ AuthController
+- **✅ Validación:** Datos de entrada.
+- **✅ Cifrado:** Contraseñas con bcrypt.
+- **✅ Autenticación:** JWT.
+- **✅ Refresh:** Tokens de renovación.
+- **✅ Hash:** Almacenamiento seguro de refresh token.
+- **✅ Seguridad:** Refresh token en cookie HTTPOnly.
+- **✅ Logout:** Invalidez de tokens.
+- **✅ Errores:** Validación y gestión.
+
+👤 ClientController
+- **✅ Validación:** Datos de entrada.
+- **✅ Autenticación:** Para obtener clientes hay que estar loggeado y solo los administradores pueden modificar o eliminar clientes.
+- **✅ CRUD:** Completo.
+- **✅ Filtros:** Dinámicos y ordenación.
+- **✅ Errores:** Gestión y respuestas estructuradas.
+- **✅ Paginación**
+
+💼 OpportunityController
+- **✅ Listado:** Con filtros (título, valor, estado, cliente), orden y paginación.
+- **✅ Detalle:** Muestra una oportunidad con cliente y tareas.
+- **✅ Creación:** Valida y crea una nueva oportunidad.
+- **✅ Actualización:** Valida y actualiza todos los campos de una oportunidad.
+- **✅ Actualización Parcial:** Valida y actualiza campos específicos de una oportunidad.
+- **✅ Eliminación:** Elimina una oportunidad.
+- **✅ Validación:** De datos de entrada en cada operación.
+- **✅ Relaciones:** Carga la relación con el cliente y las tareas.
+- **✅ Errores:** Manejo de "no encontrado" y errores de validación.
+
+
+📝 TaskController
+- **✅ Listado:** Con filtros (título, descripción, completado, oportunidad), orden y paginación.
+- **✅ Detalle:** Muestra una tarea con su oportunidad.
+- **✅ Total:** Obtiene el número total de tareas incompletas.
+- **✅ Creación:** Valida y crea una nueva tarea.
+- **✅ Actualización:** Valida y actualiza todos los campos de una tarea.
+- **✅ Actualización Parcial:** Valida y actualiza campos específicos de una tarea.
+- **✅ Eliminación:** Elimina una tarea.
+- **✅ Validación:** De datos de entrada en cada operación.
+- **✅ Relaciones:** Carga la relación con la oportunidad.
+- **✅ Errores:** Manejo de "no encontrado" y errores de validación.
+
+## API
+Uso de Métodos HTTP: Cumple con la semántica de GET, POST, PUT/PATCH, DELETE.
+Identificación de Recursos: Las URIs son claras y específicas para los recursos.
+Arquitectura separada Cliente-Servidor.
+
+❌ Puntos de Mejora:
+- Endpoints /getuser /clients/total y /tasks/total podrían integrarse en array.
+
+⚙️ Rutas api
+- **POST:** `/register`, `/login`, `/refresh`, `/getuser`, `/logout`
+- **GET:** `/user`, `/clients`, `/clients/total`, `/opportunities`, `/tasks`, `/tasks/total`
+- **PUT:** `/clients/{id}`
+- **PATCH:** `/clients/{id}`, `/opportunities/{id}`, `/tasks/{id}`
+- **DELETE:** `/clients/{id}`
+
+🌐 Rutas Web
+
+* **GET:** `/`,`/login`,`/dashboard`,`/clients`,`/opportunities`,`/tasks`
+
+## Middleware
+🛡️ IsAdmin
+- **🔒 Protección:** Verifica si el usuario autenticado tiene el rol de 'admin'.
+- **👤 Autenticación:** Utiliza el guard 'api' para obtener el usuario.
+- **✅ Autorización:** Permite el acceso si el rol es 'admin'.
+- **🚫 Denegación:** Retorna un error 403 (No autorizado) si el rol no es 'admin' o no hay usuario autenticado.
+
+👤 IsUserAuth
+-  **🔑 Autenticación:** Verifica si hay un usuario autenticado mediante el guard 'api'.
+-  **✅ Acceso:** Permite la petición si un usuario está autenticado.
+-  **🚫 Denegación:** Retorna un error 401 (No autenticado) si no hay usuario autenticado.
+
+⏳ Throttling
+- **⏱️ Control de Tasa:** Limita el número de peticiones en un periodo de tiempo.
+- **⚙️ Configurable:** Permite definir el número máximo de intentos y la duración del bloqueo.
+- **🛡️ Protección:** Ayuda a prevenir ataques de fuerza bruta y denegación de servicio (DoS).
 
 ## Front-End
-
+- **Interfaz intuitiva y amigable**
+- **Iconos importados**
+- **Componentes reutilizables con una interfaz unificada**
 - **Estado global de autenticación**: Usuario, token JWT y estado de la sesión.
-- **Gestión de tokens**: Almacenamiento seguro y renovación del **access token** mediante el **refresh token**.
+- **Gestión de tokens mediante services**: Almacenamiento seguro y renovación del **access token** mediante refresh tokens.
 - **Funciones del contexto**: Login, logout, verificación de usuario.
 - **Manejo de errores**: Errores de autenticación y red.
 - **Sincronización con la API**: Autenticación en las solicitudes a la API.
