@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
 // URL base de la API
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://leadtie-portfolio.infy.uk/api';
 
 // Configuración de Axios para agregar el token en los encabezados
 const getAuthHeader = () => {

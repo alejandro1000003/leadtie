@@ -1,0 +1,4 @@
+zip -r archivo.zip . -x './node_modules/*' './public/*' './resources/*' './tests/*'/node_modules
+/public
+/resources
+/tests
