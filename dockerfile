@@ -36,6 +36,15 @@ RUN composer install
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html/database
-RUN chmod -R 755 /var/www/html/database
-RUN touch /var/www/html/database/leadtie.sqlite
-RUN chmod 660 /var/www/html/database/leadtie.sqlite
+
+# Copia el script de inicio y da permisos
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+EXPOSE 10000
+
+CMD ["/start.sh"]
+
+# RUN chmod -R 755 /var/www/html/database
+# RUN touch /var/www/html/database/leadtie.sqlite
+# RUN chmod 660 /var/www/html/database/leadtie.sqlite
