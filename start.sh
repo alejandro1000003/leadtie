@@ -7,7 +7,7 @@ if [ ! -f /var/www/html/database/leadtie.sqlite ]; then
 fi
 
 # Ejecutar migraciones sin confirmación (forzado)
-php artisan migrate --force
+php artisan migrate --seed --force 
 
 # Arrancar servidor Laravel en puerto 10000
 php artisan serve --host=0.0.0.0 --port=10000
