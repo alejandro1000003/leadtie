@@ -162,5 +162,5 @@ Arquitectura separada Cliente-Servidor.
    sudo docker run -p 8000:80 demo/laravel:0.1
    ```
 
-4. Accede a la aplicación en tu navegador en `http://localhost:8000`.
+4. Accede a la aplicación en tu navegador en `https://leadtie.onrender.com:8000`.
 

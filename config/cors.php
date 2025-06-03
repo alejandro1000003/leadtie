@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['POST', 'GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
-    'allowed_origins' => ['http://localhost', 'http://127.0.0.1', 'http://127.0.0.1:8000'],
+    'allowed_origins' => ['https://leadtie.onrender.com', 'http://127.0.0.1', 'http://127.0.0.1:8000'],
 
     'allowed_origins_patterns' => [],
 
