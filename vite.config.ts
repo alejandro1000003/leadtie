@@ -14,6 +14,7 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
+    base: '/build/', 
     esbuild: {
         jsx: 'automatic',
     },
@@ -30,5 +31,5 @@ export default defineConfig({
         //     secure: false
         //   }
         // }
-      }
+    }
 });
