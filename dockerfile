@@ -37,4 +37,5 @@ RUN composer install
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html/database
 RUN chmod -R 755 /var/www/html/database
+RUN touch /var/www/html/database/leadtie.sqlite
 RUN chmod 660 /var/www/html/database/leadtie.sqlite
