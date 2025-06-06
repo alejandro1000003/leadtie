@@ -7,10 +7,10 @@ import Navbar from "@/components/navbar";
 import { getTotalTasks } from '../services/tasks-api-service';
 import { getTotalClients } from '../services/client-api-service';
 import { getOpportunities } from "@/services/opportunities-api-service";
-import ErrorPage from './error-page';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faListCheck, faChartBar, faArrowRight, faHandshake, faCoins, faTimesCircle } from '@fortawesome/free-solid-svg-icons'; // Importa más iconos
 
+const ErrorPage = React.lazy(() => import('./error-page'));
 type TotalCounts = {
   tasks: number | null;
   clients: number | null;
@@ -55,10 +55,12 @@ export default function Dashboard() {
           getTotalClients(),
           getOpportunities(),
         ]);
+        
         setTotalCounts({
           tasks: tasksCount,
           clients: clientsCount,
         });
+
         setOpportunities(opportunitiesResponse.data.map((item: any) => ({
           id: item.id,
           title: item.title,

@@ -1,12 +1,13 @@
 import { faArrowLeft,faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react';
 import { ClientFilter } from '../components/client-filter';
 import PaginationComponent from '../components/pagination';
 import apiService, { Client } from '../services/client-api-service';
-import ErrorPage from './error-page';
 import {openPatchClientModal} from '../components/patch-client'; 
+
+const ErrorPage = React.lazy(() => import('./error-page'));
 
 const formatearFecha = (f: string) => {
     const d = new Date(f);
@@ -52,6 +53,7 @@ const ClientsList: React.FC = () => {
                 setCurrentPage(data.current_page);
                 setTotalPages(data.last_page);
             } catch (err: any) {
+                alert('Error al eliminar cliente');
                 setError(err.message || 'Error fetching clients');
             } finally {
                 setLoading(false);
@@ -122,7 +124,8 @@ const ClientsList: React.FC = () => {
                                         className="text-red-600 transition hover:scale-110"
                                         onClick={async () => {
                                             await apiService.deleteClient(client.id);
-                                            window.location.reload();
+                                            router.visit('/clients');
+
                                         }}
                                     >
                                         🗑️

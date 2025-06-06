@@ -28,6 +28,9 @@ export const useUserStore = create<UserStore>((set) => ({
       set({ user: { ...userData, token } });
     } catch (error) {
       console.error('Login error:', error);
+      throw error;
+    } finally {
+      set({ isLoading: false });
     }
   },
   logout: () => {

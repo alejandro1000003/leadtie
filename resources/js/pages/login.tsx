@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { useUserStore } from '@/stores/use-user-store';
+import { router } from '@inertiajs/react';
 
 export default function Login() {
 
@@ -20,9 +21,9 @@ export default function Login() {
         setLoading(true);
 
         try {
-            await logout();
+            // await logout();
             await login(emailInput, passwordInput);
-            window.location.href = '/dashboard';
+            router.visit('/dashboard');
         } catch (error) {
             setErrors(['Error al iniciar sesión. Inténtalo de nuevo.']);
         } finally {
