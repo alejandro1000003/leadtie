@@ -18,6 +18,7 @@ Este CRM fue desarrollado con el objetivo de crear un proyecto de portfolio func
 * **Frontend**: React, TailwindCSS
 * **Base de Datos**: SQLite
 * **Estrategia branching**: Github Flow
+* **Contenedorización**: Docker
 
 ## Backend
 
@@ -58,25 +59,15 @@ Este CRM fue desarrollado con el objetivo de crear un proyecto de portfolio func
 
 **OpportunityController**
 
-* **✅ Listado:** Con filtros (título, valor, estado, cliente), orden y paginación.
 * **✅ Detalle:** Muestra una oportunidad con cliente y tareas.
-* **✅ Creación:** Valida y crea una nueva oportunidad.
-* **✅ Actualización:** Valida y actualiza todos los campos de una oportunidad.
-* **✅ Actualización Parcial:** Valida y actualiza campos específicos de una oportunidad.
-* **✅ Eliminación:** Elimina una oportunidad.
 * **✅ Validación:** De datos de entrada en cada operación.
 * **✅ Relaciones:** Carga la relación con el cliente y las tareas.
 * **✅ Errores:** Manejo de "no encontrado" y errores de validación.
 
 **TaskController**
 
-* **✅ Listado:** Con filtros (título, descripción, completado, oportunidad), orden y paginación.
 * **✅ Detalle:** Muestra una tarea con su oportunidad.
 * **✅ Total:** Obtiene el número total de tareas incompletas.
-* **✅ Creación:** Valida y crea una nueva tarea.
-* **✅ Actualización:** Valida y actualiza todos los campos de una tarea.
-* **✅ Actualización Parcial:** Valida y actualiza campos específicos de una tarea.
-* **✅ Eliminación:** Elimina una tarea.
 * **✅ Validación:** De datos de entrada en cada operación.
 * **✅ Relaciones:** Carga la relación con la oportunidad.
 * **✅ Errores:** Manejo de "no encontrado" y errores de validación.
@@ -160,7 +151,3 @@ Arquitectura separada Cliente-Servidor.
 
    ```bash
    sudo docker run -p 8000:80 demo/laravel:0.1
-   ```
-
-4. Accede a la aplicación en tu navegador en `https://leadtie.onrender.com:8000`.
-
