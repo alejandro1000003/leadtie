@@ -1,54 +1,54 @@
 {
-  "_client-api-service-C8524uze.js": {
-    "file": "assets/client-api-service-C8524uze.js",
+  "_client-api-service-BII4QMvG.js": {
+    "file": "assets/client-api-service-BII4QMvG.js",
     "name": "client-api-service",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_index-Bx_uW3Zy.js": {
-    "file": "assets/index-Bx_uW3Zy.js",
-    "name": "index",
-    "imports": [
-      "resources/js/app.tsx",
-      "_index-xyAnvVPW.js"
-    ]
-  },
-  "_index-xyAnvVPW.js": {
-    "file": "assets/index-xyAnvVPW.js",
+  "_index-BCEuPExn.js": {
+    "file": "assets/index-BCEuPExn.js",
     "name": "index",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_index.es-DJ11ztjN.js": {
-    "file": "assets/index.es-DJ11ztjN.js",
+  "_index-BV6Trmtp.js": {
+    "file": "assets/index-BV6Trmtp.js",
+    "name": "index",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-BCEuPExn.js"
+    ]
+  },
+  "_index.es-C40HS0Ql.js": {
+    "file": "assets/index.es-C40HS0Ql.js",
     "name": "index.es",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_opportunities-api-service-ChV8Yhew.js": {
-    "file": "assets/opportunities-api-service-ChV8Yhew.js",
+  "_opportunities-api-service-LgO_twki.js": {
+    "file": "assets/opportunities-api-service-LgO_twki.js",
     "name": "opportunities-api-service",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_tasks-api-service-DIS_r44o.js": {
-    "file": "assets/tasks-api-service-DIS_r44o.js",
+  "_tasks-api-service-CGoT4r-K.js": {
+    "file": "assets/tasks-api-service-CGoT4r-K.js",
     "name": "tasks-api-service",
     "imports": [
       "resources/js/app.tsx",
-      "_index-xyAnvVPW.js"
+      "_index-BCEuPExn.js"
     ]
   },
-  "_use-user-store-D0JaMQlW.js": {
-    "file": "assets/use-user-store-D0JaMQlW.js",
+  "_use-user-store-CTxovUHk.js": {
+    "file": "assets/use-user-store-CTxovUHk.js",
     "name": "use-user-store",
     "imports": [
       "resources/js/app.tsx",
-      "_index-xyAnvVPW.js"
+      "_index-BCEuPExn.js"
     ]
   },
   "resources/assets/cerrar-sesion.png": {
@@ -60,12 +60,12 @@
     "src": "resources/assets/usuario.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-h6VtMHkm.css",
+    "file": "assets/app-CybiHsuM.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CxGGjgSA.js",
+    "file": "assets/app-BSMtCD-y.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -80,45 +80,45 @@
       "resources/js/pages/token-refresh.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/clients.tsx": {
-    "file": "assets/clients-CeJHj2Zt.js",
+    "file": "assets/clients-B6u9MF3M.js",
     "name": "clients",
     "src": "resources/js/pages/clients.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_index.es-DJ11ztjN.js",
-      "_client-api-service-C8524uze.js"
+      "_index.es-C40HS0Ql.js",
+      "_client-api-service-BII4QMvG.js"
     ],
     "dynamicImports": [
       "resources/js/pages/error-page.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/dashboard.tsx": {
-    "file": "assets/dashboard-DuhXL27-.js",
+    "file": "assets/dashboard-BAM9JQPL.js",
     "name": "dashboard",
     "src": "resources/js/pages/dashboard.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_tasks-api-service-DIS_r44o.js",
-      "_use-user-store-D0JaMQlW.js",
-      "_client-api-service-C8524uze.js",
-      "_opportunities-api-service-ChV8Yhew.js",
-      "_index.es-DJ11ztjN.js",
-      "_index-xyAnvVPW.js"
+      "_tasks-api-service-CGoT4r-K.js",
+      "_use-user-store-CTxovUHk.js",
+      "_client-api-service-BII4QMvG.js",
+      "_opportunities-api-service-LgO_twki.js",
+      "_index.es-C40HS0Ql.js",
+      "_index-BCEuPExn.js"
     ],
     "dynamicImports": [
       "resources/js/pages/error-page.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ],
     "assets": [
       "assets/cerrar-sesion-D0-GGndO.png",
@@ -126,7 +126,7 @@
     ]
   },
   "resources/js/pages/error-page.tsx": {
-    "file": "assets/error-page-YirL9gZz.js",
+    "file": "assets/error-page-DpAlqp0P.js",
     "name": "error-page",
     "src": "resources/js/pages/error-page.tsx",
     "isDynamicEntry": true,
@@ -134,11 +134,11 @@
       "resources/js/app.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/home.tsx": {
-    "file": "assets/home-CSu6CnT0.js",
+    "file": "assets/home-dL35airo.js",
     "name": "home",
     "src": "resources/js/pages/home.tsx",
     "isDynamicEntry": true,
@@ -146,58 +146,58 @@
       "resources/js/app.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/login.tsx": {
-    "file": "assets/login-Pnw-KrK6.js",
+    "file": "assets/login-BXMDffQb.js",
     "name": "login",
     "src": "resources/js/pages/login.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_index-xyAnvVPW.js",
-      "_use-user-store-D0JaMQlW.js",
-      "_index-Bx_uW3Zy.js"
+      "_index-BCEuPExn.js",
+      "_use-user-store-CTxovUHk.js",
+      "_index-BV6Trmtp.js"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/opportunities.tsx": {
-    "file": "assets/opportunities-DM2kR0IJ.js",
+    "file": "assets/opportunities-kXraJcf8.js",
     "name": "opportunities",
     "src": "resources/js/pages/opportunities.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_index.es-DJ11ztjN.js",
-      "_opportunities-api-service-ChV8Yhew.js",
+      "_index.es-C40HS0Ql.js",
+      "_opportunities-api-service-LgO_twki.js",
       "resources/js/pages/error-page.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/tasks.tsx": {
-    "file": "assets/tasks-CqHWiOJA.js",
+    "file": "assets/tasks-BviSdYPv.js",
     "name": "tasks",
     "src": "resources/js/pages/tasks.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_tasks-api-service-DIS_r44o.js",
-      "_index-xyAnvVPW.js",
-      "_index-Bx_uW3Zy.js",
-      "_index.es-DJ11ztjN.js",
+      "_tasks-api-service-CGoT4r-K.js",
+      "_index-BCEuPExn.js",
+      "_index-BV6Trmtp.js",
+      "_index.es-C40HS0Ql.js",
       "resources/js/pages/error-page.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   },
   "resources/js/pages/token-refresh.tsx": {
-    "file": "assets/token-refresh-0Vn94zIe.js",
+    "file": "assets/token-refresh-D5SyQF6i.js",
     "name": "token-refresh",
     "src": "resources/js/pages/token-refresh.tsx",
     "isDynamicEntry": true,
@@ -205,7 +205,7 @@
       "resources/js/app.tsx"
     ],
     "css": [
-      "assets/app-h6VtMHkm.css"
+      "assets/app-CybiHsuM.css"
     ]
   }
 }
