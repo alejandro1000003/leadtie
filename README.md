@@ -128,26 +128,3 @@ Arquitectura separada Cliente-Servidor.
 * **Sincronización con la API**: Autenticación en las solicitudes a la API.
 * **Escalabilidad**: Posibilidad de agregar más datos de usuario (roles, preferencias, etc.).
 * **Accesibilidad y reusabilidad**: Facilitar el acceso al contexto desde cualquier parte de la aplicación.
-
-## Pruebas unitarias
-
-## CORS
-
-## Instalación y Configuración
-
-1. Clona el repositorio en tu máquina local.
-
-   ```bash
-   git clone <URL del repositorio>
-   ```
-
-2. Construye el contenedor Docker.
-
-   ```bash
-   sudo docker build -t demo/laravel:0.1 .
-   ```
-
-3. Inicia el contenedor Docker.
-
-   ```bash
-   sudo docker run -p 8000:80 demo/laravel:0.1
